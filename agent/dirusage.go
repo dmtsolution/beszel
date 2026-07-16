@@ -105,7 +105,11 @@ func (dm *dirUsageManager) scan() {
 		if size == 0 {
 			continue
 		}
-		entries = append(entries, &dirusage.Entry{Path: path, Size: size})
+		var modTime int64
+		if info, statErr := os.Stat(path); statErr == nil {
+			modTime = info.ModTime().Unix()
+		}
+		entries = append(entries, &dirusage.Entry{Path: path, Size: size, ModTime: modTime})
 	}
 	sort.Slice(entries, func(i, j int) bool { return entries[i].Size > entries[j].Size })
 

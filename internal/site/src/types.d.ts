@@ -413,6 +413,7 @@ export interface DirUsageRecord extends RecordModel {
 	system: string
 	path: string
 	size: number
+	modified: number
 	updated: number
 }
 

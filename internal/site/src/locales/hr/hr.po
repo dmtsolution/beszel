@@ -1080,6 +1080,10 @@ msgstr "Iskorištenost memorije Docker spremnika"
 msgid "Model"
 msgstr ""
 
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Modified"
+msgstr ""
+
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx

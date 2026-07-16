@@ -328,13 +328,14 @@ func createDirUsageRecords(app core.App, data []*dirusage.Entry, systemId string
 	valueStrings := make([]string, 0, len(data))
 	for i, entry := range data {
 		suffix := fmt.Sprintf("%d", i)
-		valueStrings = append(valueStrings, fmt.Sprintf("({:id%[1]s}, {:system}, {:path%[1]s}, {:size%[1]s}, {:updated})", suffix))
+		valueStrings = append(valueStrings, fmt.Sprintf("({:id%[1]s}, {:system}, {:path%[1]s}, {:size%[1]s}, {:modified%[1]s}, {:updated})", suffix))
 		params["id"+suffix] = makeStableHashId(systemId, entry.Path)
 		params["path"+suffix] = entry.Path
 		params["size"+suffix] = entry.Size
+		params["modified"+suffix] = entry.ModTime
 	}
 	queryString := fmt.Sprintf(
-		"INSERT INTO dir_usage (id, system, path, size, updated) VALUES %s ON CONFLICT(id) DO UPDATE SET system = excluded.system, path = excluded.path, size = excluded.size, updated = excluded.updated",
+		"INSERT INTO dir_usage (id, system, path, size, modified, updated) VALUES %s ON CONFLICT(id) DO UPDATE SET system = excluded.system, path = excluded.path, size = excluded.size, modified = excluded.modified, updated = excluded.updated",
 		strings.Join(valueStrings, ","),
 	)
 	_, err := app.DB().NewQuery(queryString).Bind(params).Execute()

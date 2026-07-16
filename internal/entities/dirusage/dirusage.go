@@ -4,6 +4,7 @@ package dirusage
 
 // Entry represents the disk usage of a single directory.
 type Entry struct {
-	Path string `json:"p" cbor:"0,keyasint"`
-	Size uint64 `json:"s" cbor:"1,keyasint"` // bytes
+	Path    string `json:"p" cbor:"0,keyasint"`
+	Size    uint64 `json:"s" cbor:"1,keyasint"` // bytes
+	ModTime int64  `json:"m" cbor:"2,keyasint"` // unix seconds, directory's own last-modified time
 }

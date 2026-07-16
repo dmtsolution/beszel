@@ -44,7 +44,7 @@ export default function DirUsageTable({ systemId }: { systemId?: string }) {
 		function fetchData(systemId?: string) {
 			pb.collection<DirUsageRecord>("dir_usage")
 				.getList(0, 2000, {
-					fields: "path,size,system,updated",
+					fields: "path,size,modified,system,updated",
 					filter: systemId ? pb.filter("system={:system}", { system: systemId }) : undefined,
 				})
 				.then(
@@ -190,7 +190,7 @@ const AllDirUsageTable = memo(function AllDirUsageTable({
 			ref={scrollRef}
 		>
 			<div style={{ height: `${virtualizer.getTotalSize() + 40}px`, paddingTop, paddingBottom }}>
-				<table className="text-sm w-full h-full text-nowrap">
+				<table className="text-sm w-full h-full text-nowrap table-fixed">
 					<DirUsageTableHead table={table} />
 					<TableBody>
 						{rows.length ? (
@@ -218,7 +218,7 @@ function DirUsageTableHead({ table }: { table: TableType<DirUsageRecord> }) {
 			{table.getHeaderGroups().map((headerGroup) => (
 				<tr key={headerGroup.id}>
 					{headerGroup.headers.map((header) => (
-						<TableHead className="px-2" key={header.id}>
+						<TableHead className="px-2" key={header.id} style={{ width: header.getSize() }}>
 							{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
 						</TableHead>
 					))}
@@ -243,6 +243,7 @@ const DirUsageTableRow = memo(function DirUsageTableRow({
 					className="py-0"
 					style={{
 						height: virtualRow.size,
+						width: cell.column.getSize(),
 					}}
 				>
 					{flexRender(cell.column.columnDef.cell, cell.getContext())}
