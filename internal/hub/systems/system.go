@@ -17,6 +17,7 @@ import (
 	"github.com/henrygd/beszel/internal/hub/utils"
 	"github.com/henrygd/beszel/internal/hub/ws"
 
+	"github.com/henrygd/beszel/internal/entities/authlog"
 	"github.com/henrygd/beszel/internal/entities/container"
 	"github.com/henrygd/beszel/internal/entities/dirusage"
 	"github.com/henrygd/beszel/internal/entities/smart"
@@ -239,6 +240,13 @@ func (sys *System) createRecords(data *system.CombinedData) (*core.Record, error
 			}
 		}
 
+		// add new auth_log records
+		if len(data.AuthEvents) > 0 {
+			if err := createAuthLogRecords(txApp, data.AuthEvents, sys.Id); err != nil {
+				return err
+			}
+		}
+
 		// add system details record
 		if data.Details != nil {
 			if err := createSystemDetailsRecord(txApp, data.Details, sys.Id); err != nil {
@@ -339,6 +347,54 @@ func createDirUsageRecords(app core.App, data []*dirusage.Entry, systemId string
 		strings.Join(valueStrings, ","),
 	)
 	_, err := app.DB().NewQuery(queryString).Bind(params).Execute()
+	return err
+}
+
+// createAuthLogRecords inserts new auth_log events. This is append-only
+// (each row is a distinct historical event, not a current-state snapshot),
+// deduped by a stable hash of the event's contents so lines re-read after an
+// agent restart don't create duplicates. Old entries are pruned to keep the
+// table bounded.
+func createAuthLogRecords(app core.App, data []*authlog.Entry, systemId string) error {
+	if len(data) == 0 {
+		return nil
+	}
+	params := dbx.Params{
+		"system": systemId,
+	}
+
+	valueStrings := make([]string, 0, len(data))
+	for i, entry := range data {
+		suffix := fmt.Sprintf("%d", i)
+		valueStrings = append(valueStrings, fmt.Sprintf("({:id%[1]s}, {:system}, {:time%[1]s}, {:type%[1]s}, {:user%[1]s}, {:sourceIp%[1]s}, {:detail%[1]s})", suffix))
+		params["id"+suffix] = makeStableHashId(
+			systemId,
+			fmt.Sprintf("%d", entry.Time),
+			fmt.Sprintf("%d", entry.Type),
+			entry.User,
+			entry.SourceIP,
+			entry.Detail,
+		)
+		params["time"+suffix] = entry.Time
+		params["type"+suffix] = entry.Type
+		params["user"+suffix] = entry.User
+		params["sourceIp"+suffix] = entry.SourceIP
+		params["detail"+suffix] = entry.Detail
+	}
+	queryString := fmt.Sprintf(
+		"INSERT INTO auth_log (id, system, time, type, user, source_ip, detail) VALUES %s ON CONFLICT(id) DO NOTHING",
+		strings.Join(valueStrings, ","),
+	)
+	if _, err := app.DB().NewQuery(queryString).Bind(params).Execute(); err != nil {
+		return err
+	}
+
+	// prune events older than 30 days to keep the table bounded
+	cutoff := time.Now().Add(-30 * 24 * time.Hour).Unix()
+	_, err := app.DB().
+		NewQuery("DELETE FROM auth_log WHERE system = {:system} AND time < {:cutoff}").
+		Bind(dbx.Params{"system": systemId, "cutoff": cutoff}).
+		Execute()
 	return err
 }
 

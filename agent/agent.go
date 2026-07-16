@@ -49,6 +49,7 @@ type Agent struct {
 	smartManager              *SmartManager                                         // Manages SMART data
 	systemdManager            *systemdManager                                       // Manages systemd services
 	dirUsageManager           *dirUsageManager                                      // Manages directory disk usage stats
+	authLogManager            *authLogManager                                       // Manages auth/security log events
 }
 
 // NewAgent creates a new agent with the given data directory for persisting data.
@@ -135,6 +136,8 @@ func NewAgent(dataDir ...string) (agent *Agent, err error) {
 
 	agent.dirUsageManager = newDirUsageManager()
 
+	agent.authLogManager = newAuthLogManager()
+
 	agent.smartManager, err = NewSmartManager()
 	if err != nil {
 		slog.Debug("SMART", "err", err)
@@ -197,6 +200,13 @@ func (a *Agent) gatherStats(options common.DataRequestOptions) *system.CombinedD
 	if a.dirUsageManager != nil && cacheTimeMs == defaultDataCacheTimeMs {
 		if entries := a.dirUsageManager.getEntries(); len(entries) > 0 {
 			data.DirUsage = entries
+		}
+	}
+
+	// skip auth log events if cache time is not the default 60sec interval
+	if a.authLogManager != nil && cacheTimeMs == defaultDataCacheTimeMs {
+		if events := a.authLogManager.getEvents(); len(events) > 0 {
+			data.AuthEvents = events
 		}
 	}
 

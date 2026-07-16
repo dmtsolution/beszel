@@ -245,6 +245,10 @@ msgstr "백업"
 msgid "Bandwidth"
 msgstr "대역폭"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Banned"
+msgstr ""
+
 #. Battery label in systems table header
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Bat"
@@ -585,6 +589,7 @@ msgstr "지문 삭제"
 msgid "Description"
 msgstr "설명"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
 msgstr "세부사항"
@@ -734,6 +739,10 @@ msgstr "일시적"
 msgid "Error"
 msgstr "오류"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Event"
+msgstr ""
+
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Example:"
 msgstr "예시:"
@@ -812,6 +821,7 @@ msgstr "알림 수정 실패"
 msgid "Failed: {0}"
 msgstr "실패: {0}"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
@@ -1021,9 +1031,11 @@ msgstr "로그인"
 msgid "Login attempt failed"
 msgstr "로그인 실패"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
+#: src/components/routes/system.tsx
 msgid "Logs"
 msgstr "로그"
 
@@ -1124,6 +1136,7 @@ msgstr "아니오"
 msgid "No results found."
 msgstr "결과가 없습니다."
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
@@ -1535,6 +1548,22 @@ msgstr "SMTP 설정"
 msgid "Sort By"
 msgstr "정렬 기준"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Source IP"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "SSH failed"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "SSH login"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "SSH logins, sudo commands, and fail2ban bans."
+msgstr ""
+
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Start Time"
@@ -1558,6 +1587,10 @@ msgstr "상태"
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "하위 상태"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Sudo"
+msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap space used by the system"
@@ -1671,6 +1704,10 @@ msgstr "{extraFsName}의 처리량"
 msgid "Throughput of root filesystem"
 msgstr "루트 파일 시스템의 처리량"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Time"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "시간 형식"
@@ -1722,6 +1759,7 @@ msgid "Total time spent on read/write (can exceed 100%)"
 msgstr ""
 
 #. placeholder {0}: data.length
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "총: {0}"
@@ -1789,6 +1827,10 @@ msgstr "디스크 사용량이 임계값을 초과할 때 트리거됩니다."
 msgid "Type"
 msgstr "유형"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Unbanned"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Unit file"
 msgstr "Unit 파일"
@@ -1804,6 +1846,7 @@ msgid "Universal token"
 msgstr "범용 토큰"
 
 #. Context: Battery state
+#: src/components/auth-log-table/auth-log-table-columns.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "알 수 없음"
@@ -1863,6 +1906,10 @@ msgstr "루트 파티션의 사용량"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Used"
 msgstr "사용됨"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "User"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx

@@ -245,6 +245,10 @@ msgstr "Архиви"
 msgid "Bandwidth"
 msgstr "Bandwidth на мрежата"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Banned"
+msgstr ""
+
 #. Battery label in systems table header
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Bat"
@@ -585,6 +589,7 @@ msgstr "Изтрий пръстов отпечатък"
 msgid "Description"
 msgstr "Описание"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
 msgstr "Подробности"
@@ -734,6 +739,10 @@ msgstr "Ефимерен"
 msgid "Error"
 msgstr "Грешка"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Event"
+msgstr ""
+
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Example:"
 msgstr "Пример:"
@@ -812,6 +821,7 @@ msgstr "Неуспешно обнови тревога"
 msgid "Failed: {0}"
 msgstr "Неуспешни: {0}"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
@@ -1021,9 +1031,11 @@ msgstr "Вход"
 msgid "Login attempt failed"
 msgstr "Неуспешен опит за вход"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
+#: src/components/routes/system.tsx
 msgid "Logs"
 msgstr "Логове"
 
@@ -1124,6 +1136,7 @@ msgstr "Не"
 msgid "No results found."
 msgstr "Няма намерени резултати."
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
@@ -1535,6 +1548,22 @@ msgstr "Настройки за SMTP"
 msgid "Sort By"
 msgstr "Сортиране по"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Source IP"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "SSH failed"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "SSH login"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "SSH logins, sudo commands, and fail2ban bans."
+msgstr ""
+
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Start Time"
@@ -1558,6 +1587,10 @@ msgstr "Статус"
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Подсъстояние"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Sudo"
+msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap space used by the system"
@@ -1671,6 +1704,10 @@ msgstr "Пропускателна способност на {extraFsName}"
 msgid "Throughput of root filesystem"
 msgstr "Пропускателна способност на root файловата система"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Time"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "Формат на времето"
@@ -1722,6 +1759,7 @@ msgid "Total time spent on read/write (can exceed 100%)"
 msgstr ""
 
 #. placeholder {0}: data.length
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "Общо: {0}"
@@ -1789,6 +1827,10 @@ msgstr "Задейства се, когато употребата на няко
 msgid "Type"
 msgstr "Тип"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Unbanned"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Unit file"
 msgstr "Файл на единица"
@@ -1804,6 +1846,7 @@ msgid "Universal token"
 msgstr "Универсален тоукън"
 
 #. Context: Battery state
+#: src/components/auth-log-table/auth-log-table-columns.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "Неизвестна"
@@ -1863,6 +1906,10 @@ msgstr "Употреба на root partition-а"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Used"
 msgstr "Използвани"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "User"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx

@@ -1,6 +1,7 @@
 import { memo, useState } from "react"
 import { Trans } from "@lingui/react/macro"
 import { compareSemVer, parseSemVer } from "@/lib/utils"
+import { Os } from "@/lib/enums"
 import type { GPUData } from "@/types"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import InfoBar from "./system/info-bar"
@@ -11,9 +12,9 @@ import { RootDiskCharts, ExtraFsCharts } from "./system/charts/disk-charts"
 import { BandwidthChart, ContainerNetworkChart } from "./system/charts/network-charts"
 import { TemperatureChart, BatteryChart } from "./system/charts/sensor-charts"
 import { GpuPowerChart, GpuDetailCharts } from "./system/charts/gpu-charts"
-import { LazyContainersTable, LazyDirUsageTable, LazySmartTable, LazySystemdTable } from "./system/lazy-tables"
+import { LazyAuthLogTable, LazyContainersTable, LazyDirUsageTable, LazySmartTable, LazySystemdTable } from "./system/lazy-tables"
 import { LoadAverageChart } from "./system/charts/load-average-chart"
-import { ContainerIcon, CpuIcon, HardDriveIcon, TerminalSquareIcon } from "lucide-react"
+import { ContainerIcon, CpuIcon, HardDriveIcon, ShieldIcon, TerminalSquareIcon } from "lucide-react"
 import { GpuIcon } from "../ui/icons"
 import SystemdTable from "../systemd-table/systemd-table"
 import ContainersTable from "../containers-table/containers-table"
@@ -63,12 +64,14 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 	const hasContainersTable = hasContainers && compareSemVer(chartData.agentVersion, SEMVER_0_14_0) >= 0
 	const hasSystemd = system.info.sv
 	const hasGpu = hasGpuData || hasGpuPowerData
+	const hasAuthLog = details?.os === Os.Linux
 
 	// keep tabsRef in sync for keyboard navigation
 	const tabs = ["core", "disk"]
 	if (hasGpu) tabs.push("gpu")
 	if (hasContainers) tabs.push("containers")
 	if (hasSystemd) tabs.push("services")
+	if (hasAuthLog) tabs.push("logs")
 	tabsRef.current = tabs
 
 	// shared chart props
@@ -147,6 +150,8 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 				{hasContainersTable && <LazyContainersTable systemId={system.id} />}
 
 				{hasSystemd && <LazySystemdTable systemId={system.id} />}
+
+				{hasAuthLog && <LazyAuthLogTable systemId={system.id} />}
 			</>
 		)
 	}
@@ -179,6 +184,12 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 						<TabsTrigger value="services" className="w-full flex items-center gap-2">
 							<TerminalSquareIcon className="size-3.5" />
 							<Trans>Services</Trans>
+						</TabsTrigger>
+					)}
+					{hasAuthLog && (
+						<TabsTrigger value="logs" className="w-full flex items-center gap-2">
+							<ShieldIcon className="size-3.5" />
+							<Trans>Logs</Trans>
 						</TabsTrigger>
 					)}
 				</TabsList>
@@ -262,6 +273,12 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 				{hasSystemd && (
 					<TabsContent value="services" forceMount className={activeTab === "services" ? "contents" : "hidden"}>
 						{mountedTabs.has("services") && <SystemdTable systemId={system.id} />}
+					</TabsContent>
+				)}
+
+				{hasAuthLog && (
+					<TabsContent value="logs" forceMount className={activeTab === "logs" ? "contents" : "hidden"}>
+						{mountedTabs.has("logs") && <LazyAuthLogTable systemId={system.id} />}
 					</TabsContent>
 				)}
 			</Tabs>

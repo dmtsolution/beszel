@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"time"
 
+	"github.com/henrygd/beszel/internal/entities/authlog"
 	"github.com/henrygd/beszel/internal/entities/container"
 	"github.com/henrygd/beszel/internal/entities/dirusage"
 	"github.com/henrygd/beszel/internal/entities/systemd"
@@ -181,4 +182,5 @@ type CombinedData struct {
 	SystemdServices []*systemd.Service `json:"systemd,omitempty" cbor:"3,keyasint,omitempty"`
 	Details         *Details           `cbor:"4,keyasint,omitempty"`
 	DirUsage        []*dirusage.Entry  `json:"dirusage,omitempty" cbor:"5,keyasint,omitempty"`
+	AuthEvents      []*authlog.Entry   `json:"authlog,omitempty" cbor:"6,keyasint,omitempty"`
 }

@@ -240,6 +240,10 @@ msgstr "Backups"
 msgid "Bandwidth"
 msgstr "Bandwidth"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Banned"
+msgstr "Banned"
+
 #. Battery label in systems table header
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Bat"
@@ -580,6 +584,7 @@ msgstr "Delete fingerprint"
 msgid "Description"
 msgstr "Description"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
 msgstr "Detail"
@@ -729,6 +734,10 @@ msgstr "Ephemeral"
 msgid "Error"
 msgstr "Error"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Event"
+msgstr "Event"
+
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Example:"
 msgstr "Example:"
@@ -807,6 +816,7 @@ msgstr "Failed to update alert"
 msgid "Failed: {0}"
 msgstr "Failed: {0}"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
@@ -1016,9 +1026,11 @@ msgstr "Login"
 msgid "Login attempt failed"
 msgstr "Login attempt failed"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
+#: src/components/routes/system.tsx
 msgid "Logs"
 msgstr "Logs"
 
@@ -1119,6 +1131,7 @@ msgstr "No"
 msgid "No results found."
 msgstr "No results found."
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
@@ -1530,6 +1543,22 @@ msgstr "SMTP settings"
 msgid "Sort By"
 msgstr "Sort By"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Source IP"
+msgstr "Source IP"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "SSH failed"
+msgstr "SSH failed"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "SSH login"
+msgstr "SSH login"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "SSH logins, sudo commands, and fail2ban bans."
+msgstr "SSH logins, sudo commands, and fail2ban bans."
+
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Start Time"
@@ -1553,6 +1582,10 @@ msgstr "Status"
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Sub State"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Sudo"
+msgstr "Sudo"
 
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap space used by the system"
@@ -1666,6 +1699,10 @@ msgstr "Throughput of {extraFsName}"
 msgid "Throughput of root filesystem"
 msgstr "Throughput of root filesystem"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Time"
+msgstr "Time"
+
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "Time format"
@@ -1717,6 +1754,7 @@ msgid "Total time spent on read/write (can exceed 100%)"
 msgstr "Total time spent on read/write (can exceed 100%)"
 
 #. placeholder {0}: data.length
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "Total: {0}"
@@ -1784,6 +1822,10 @@ msgstr "Triggers when usage of any disk exceeds a threshold"
 msgid "Type"
 msgstr "Type"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Unbanned"
+msgstr "Unbanned"
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Unit file"
 msgstr "Unit file"
@@ -1799,6 +1841,7 @@ msgid "Universal token"
 msgstr "Universal token"
 
 #. Context: Battery state
+#: src/components/auth-log-table/auth-log-table-columns.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "Unknown"
@@ -1858,6 +1901,10 @@ msgstr "Usage of root partition"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Used"
 msgstr "Used"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "User"
+msgstr "User"
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx

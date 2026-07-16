@@ -6,6 +6,15 @@ export enum Os {
 	FreeBSD,
 }
 
+/** Type of authentication/security log event */
+export enum AuthEventType {
+	SSHSuccess,
+	SSHFailure,
+	Sudo,
+	Ban,
+	Unban,
+}
+
 /** Type of chart */
 export enum ChartType {
 	Memory,

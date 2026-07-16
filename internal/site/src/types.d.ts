@@ -409,6 +409,15 @@ export interface SmartDeviceRecord extends RecordModel {
 	updated: string
 }
 
+export interface AuthLogRecord extends RecordModel {
+	system: string
+	time: number
+	type: number
+	user?: string
+	source_ip?: string
+	detail?: string
+}
+
 export interface DirUsageRecord extends RecordModel {
 	system: string
 	path: string

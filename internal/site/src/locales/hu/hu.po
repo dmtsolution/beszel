@@ -245,6 +245,10 @@ msgstr "Biztonsági mentések"
 msgid "Bandwidth"
 msgstr "Sávszélesség"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Banned"
+msgstr ""
+
 #. Battery label in systems table header
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Bat"
@@ -585,6 +589,7 @@ msgstr "Ujjlenyomat törlése"
 msgid "Description"
 msgstr "Leírás"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
 msgstr "Részlet"
@@ -734,6 +739,10 @@ msgstr "Ideiglenes"
 msgid "Error"
 msgstr "Hiba"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Event"
+msgstr ""
+
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Example:"
 msgstr "Példa:"
@@ -812,6 +821,7 @@ msgstr "Nem sikerült frissíteni a riasztást"
 msgid "Failed: {0}"
 msgstr "Sikertelen: {0}"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
@@ -1021,9 +1031,11 @@ msgstr "Bejelentkezés"
 msgid "Login attempt failed"
 msgstr "Bejelentkezés sikertelen"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
+#: src/components/routes/system.tsx
 msgid "Logs"
 msgstr "Naplók"
 
@@ -1124,6 +1136,7 @@ msgstr "Nem"
 msgid "No results found."
 msgstr "Nincs találat."
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
@@ -1535,6 +1548,22 @@ msgstr "SMTP beállítások"
 msgid "Sort By"
 msgstr "Rendezés"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Source IP"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "SSH failed"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "SSH login"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "SSH logins, sudo commands, and fail2ban bans."
+msgstr ""
+
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Start Time"
@@ -1558,6 +1587,10 @@ msgstr "Állapot"
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Részállapot"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Sudo"
+msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap space used by the system"
@@ -1671,6 +1704,10 @@ msgstr "A {extraFsName} átviteli teljesítménye"
 msgid "Throughput of root filesystem"
 msgstr "A gyökér fájlrendszer átviteli teljesítménye"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Time"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "Időformátum"
@@ -1722,6 +1759,7 @@ msgid "Total time spent on read/write (can exceed 100%)"
 msgstr ""
 
 #. placeholder {0}: data.length
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "Összesen: {0}"
@@ -1789,6 +1827,10 @@ msgstr "Riaszt, ha a lemezhasználat túllép egy küszöbértéket"
 msgid "Type"
 msgstr "Típus"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Unbanned"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Unit file"
 msgstr "Egység fájl"
@@ -1804,6 +1846,7 @@ msgid "Universal token"
 msgstr "Univerzális token"
 
 #. Context: Battery state
+#: src/components/auth-log-table/auth-log-table-columns.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "Ismeretlen"
@@ -1863,6 +1906,10 @@ msgstr "Root partíció kihasználtsága"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Used"
 msgstr "Felhasznált"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "User"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx
