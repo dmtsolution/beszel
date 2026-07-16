@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/henrygd/beszel/internal/entities/container"
+	"github.com/henrygd/beszel/internal/entities/dirusage"
 	"github.com/henrygd/beszel/internal/entities/systemd"
 )
 
@@ -179,4 +180,5 @@ type CombinedData struct {
 	Containers      []*container.Stats `json:"container" cbor:"2,keyasint"`
 	SystemdServices []*systemd.Service `json:"systemd,omitempty" cbor:"3,keyasint,omitempty"`
 	Details         *Details           `cbor:"4,keyasint,omitempty"`
+	DirUsage        []*dirusage.Entry  `json:"dirusage,omitempty" cbor:"5,keyasint,omitempty"`
 }

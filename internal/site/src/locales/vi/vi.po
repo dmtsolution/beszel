@@ -593,6 +593,10 @@ msgstr "Chi tiết"
 msgid "Device"
 msgstr "Thiết bị"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Directories"
+msgstr ""
+
 #. Context: Battery state
 #: src/lib/i18n.ts
 msgid "Discharging"
@@ -717,7 +721,6 @@ msgstr "Nhập mật khẩu một lần của bạn."
 msgid "Ephemeral"
 msgstr "Tạm thời"
 
-#: src/components/login/auth-form.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/config-yaml.tsx
 #: src/components/routes/settings/heartbeat.tsx
@@ -810,6 +813,7 @@ msgid "Failed: {0}"
 msgstr "Thất bại: {0}"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1119,6 +1123,7 @@ msgstr "Không tìm thấy kết quả."
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1213,6 +1218,10 @@ msgstr "Yêu cầu đặt lại mật khẩu đã được nhận"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Past"
 msgstr "Quá khứ"
+
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Path"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
@@ -1510,6 +1519,10 @@ msgstr "Cài đặt đã được lưu"
 msgid "Sign in"
 msgstr "Đăng nhập"
 
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Size"
+msgstr ""
+
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
 msgstr "Cài đặt SMTP"
@@ -1549,6 +1562,11 @@ msgstr "Không gian hoán đổi được sử dụng bởi hệ thống"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap Usage"
 msgstr "Sử dụng Hoán đổi"
+
+#: src/components/mode-toggle.tsx
+#: src/components/mode-toggle.tsx
+msgid "Switch theme"
+msgstr ""
 
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
@@ -1659,8 +1677,8 @@ msgstr "Đến email(s)"
 
 #: src/components/mode-toggle.tsx
 #: src/components/mode-toggle.tsx
-msgid "Toggle theme"
-msgstr "Chuyển đổi chủ đề"
+#~ msgid "Toggle theme"
+#~ msgstr "Chuyển đổi chủ đề"
 
 #: src/components/add-system.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1703,6 +1721,11 @@ msgstr ""
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "Tổng: {0}"
+
+#. placeholder {0}: totalValue.toFixed(1)
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Total: {0} {totalUnit}"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Triggered by"
@@ -1806,6 +1829,7 @@ msgstr "Cập nhật"
 msgid "Updated"
 msgstr "Đã cập nhật"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Updated every 10 minutes."
 msgstr "Cập nhật mỗi 10 phút."

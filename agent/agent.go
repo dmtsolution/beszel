@@ -48,6 +48,7 @@ type Agent struct {
 	keys                      []gossh.PublicKey                                     // SSH public keys
 	smartManager              *SmartManager                                         // Manages SMART data
 	systemdManager            *systemdManager                                       // Manages systemd services
+	dirUsageManager           *dirUsageManager                                      // Manages directory disk usage stats
 }
 
 // NewAgent creates a new agent with the given data directory for persisting data.
@@ -132,6 +133,8 @@ func NewAgent(dataDir ...string) (agent *Agent, err error) {
 		slog.Debug("Systemd", "err", err)
 	}
 
+	agent.dirUsageManager = newDirUsageManager()
+
 	agent.smartManager, err = NewSmartManager()
 	if err != nil {
 		slog.Debug("SMART", "err", err)
@@ -187,6 +190,13 @@ func (a *Agent) gatherStats(options common.DataRequestOptions) *system.CombinedD
 		}
 		if a.systemdManager.hasFreshStats {
 			data.SystemdServices = a.systemdManager.getServiceStats(nil, false)
+		}
+	}
+
+	// skip updating dir usage if cache time is not the default 60sec interval
+	if a.dirUsageManager != nil && cacheTimeMs == defaultDataCacheTimeMs {
+		if entries := a.dirUsageManager.getEntries(); len(entries) > 0 {
+			data.DirUsage = entries
 		}
 	}
 

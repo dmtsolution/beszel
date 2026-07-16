@@ -409,6 +409,13 @@ export interface SmartDeviceRecord extends RecordModel {
 	updated: string
 }
 
+export interface DirUsageRecord extends RecordModel {
+	system: string
+	path: string
+	size: number
+	updated: number
+}
+
 export interface SystemdRecord extends RecordModel {
 	system: string
 	name: string

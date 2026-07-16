@@ -11,7 +11,7 @@ import { RootDiskCharts, ExtraFsCharts } from "./system/charts/disk-charts"
 import { BandwidthChart, ContainerNetworkChart } from "./system/charts/network-charts"
 import { TemperatureChart, BatteryChart } from "./system/charts/sensor-charts"
 import { GpuPowerChart, GpuDetailCharts } from "./system/charts/gpu-charts"
-import { LazyContainersTable, LazySmartTable, LazySystemdTable } from "./system/lazy-tables"
+import { LazyContainersTable, LazyDirUsageTable, LazySmartTable, LazySystemdTable } from "./system/lazy-tables"
 import { LoadAverageChart } from "./system/charts/load-average-chart"
 import { ContainerIcon, CpuIcon, HardDriveIcon, TerminalSquareIcon } from "lucide-react"
 import { GpuIcon } from "../ui/icons"
@@ -140,6 +140,8 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 
 				<ExtraFsCharts systemData={systemData} />
 
+				<LazyDirUsageTable systemId={system.id} />
+
 				{maybeHasSmartData && <LazySmartTable systemId={system.id} />}
 
 				{hasContainersTable && <LazyContainersTable systemId={system.id} />}
@@ -201,6 +203,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 								<RootDiskCharts systemData={systemData} />
 							</div>
 							<ExtraFsCharts systemData={systemData} />
+							<LazyDirUsageTable systemId={system.id} />
 							{maybeHasSmartData && <LazySmartTable systemId={system.id} />}
 						</>
 					)}

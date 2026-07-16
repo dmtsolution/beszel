@@ -593,6 +593,10 @@ msgstr "세부사항"
 msgid "Device"
 msgstr "장치"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Directories"
+msgstr ""
+
 #. Context: Battery state
 #: src/lib/i18n.ts
 msgid "Discharging"
@@ -717,7 +721,6 @@ msgstr "OTP를 입력하세요."
 msgid "Ephemeral"
 msgstr "일시적"
 
-#: src/components/login/auth-form.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/config-yaml.tsx
 #: src/components/routes/settings/heartbeat.tsx
@@ -810,6 +813,7 @@ msgid "Failed: {0}"
 msgstr "실패: {0}"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1119,6 +1123,7 @@ msgstr "결과가 없습니다."
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1213,6 +1218,10 @@ msgstr "비밀번호 재설정 요청이 접수되었습니다"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Past"
 msgstr "과거"
+
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Path"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
@@ -1510,6 +1519,10 @@ msgstr "설정이 저장되었습니다."
 msgid "Sign in"
 msgstr "로그인"
 
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Size"
+msgstr ""
+
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
 msgstr "SMTP 설정"
@@ -1549,6 +1562,11 @@ msgstr "시스템에서 사용된 스왑 공간"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap Usage"
 msgstr "스왑 사용량"
+
+#: src/components/mode-toggle.tsx
+#: src/components/mode-toggle.tsx
+msgid "Switch theme"
+msgstr ""
 
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
@@ -1659,8 +1677,8 @@ msgstr "받는사람(들)"
 
 #: src/components/mode-toggle.tsx
 #: src/components/mode-toggle.tsx
-msgid "Toggle theme"
-msgstr "테마 전환"
+#~ msgid "Toggle theme"
+#~ msgstr "테마 전환"
 
 #: src/components/add-system.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1703,6 +1721,11 @@ msgstr ""
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "총: {0}"
+
+#. placeholder {0}: totalValue.toFixed(1)
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Total: {0} {totalUnit}"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Triggered by"
@@ -1806,6 +1829,7 @@ msgstr "업데이트"
 msgid "Updated"
 msgstr "업데이트됨"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Updated every 10 minutes."
 msgstr "10분마다 업데이트됩니다."

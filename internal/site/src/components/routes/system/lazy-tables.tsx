@@ -34,3 +34,14 @@ export function LazySystemdTable({ systemId }: { systemId: string }) {
 		</div>
 	)
 }
+
+const DirUsageTable = lazy(() => import("../../dir-usage-table/dir-usage-table"))
+
+export function LazyDirUsageTable({ systemId }: { systemId: string }) {
+	const { isIntersecting, ref } = useIntersectionObserver({ rootMargin: "90px" })
+	return (
+		<div ref={ref} className={cn(isIntersecting && "contents")}>
+			{isIntersecting && <DirUsageTable systemId={systemId} />}
+		</div>
+	)
+}

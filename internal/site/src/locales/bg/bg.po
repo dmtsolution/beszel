@@ -593,6 +593,10 @@ msgstr "Подробности"
 msgid "Device"
 msgstr "Устройство"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Directories"
+msgstr ""
+
 #. Context: Battery state
 #: src/lib/i18n.ts
 msgid "Discharging"
@@ -717,7 +721,6 @@ msgstr "Въведете Вашата еднократна парола."
 msgid "Ephemeral"
 msgstr "Ефимерен"
 
-#: src/components/login/auth-form.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/config-yaml.tsx
 #: src/components/routes/settings/heartbeat.tsx
@@ -810,6 +813,7 @@ msgid "Failed: {0}"
 msgstr "Неуспешни: {0}"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1119,6 +1123,7 @@ msgstr "Няма намерени резултати."
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1213,6 +1218,10 @@ msgstr "Получено е искането за нулиране на паро
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Past"
 msgstr "Минал"
+
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Path"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
@@ -1510,6 +1519,10 @@ msgstr "Настройките са запазени"
 msgid "Sign in"
 msgstr "Влез"
 
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Size"
+msgstr ""
+
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
 msgstr "Настройки за SMTP"
@@ -1549,6 +1562,11 @@ msgstr "Изполван swap от системата"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap Usage"
 msgstr "Използване на swap"
+
+#: src/components/mode-toggle.tsx
+#: src/components/mode-toggle.tsx
+msgid "Switch theme"
+msgstr ""
 
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
@@ -1659,8 +1677,8 @@ msgstr "До имейл(ите)"
 
 #: src/components/mode-toggle.tsx
 #: src/components/mode-toggle.tsx
-msgid "Toggle theme"
-msgstr "Включи тема"
+#~ msgid "Toggle theme"
+#~ msgstr "Включи тема"
 
 #: src/components/add-system.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1703,6 +1721,11 @@ msgstr ""
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "Общо: {0}"
+
+#. placeholder {0}: totalValue.toFixed(1)
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Total: {0} {totalUnit}"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Triggered by"
@@ -1806,6 +1829,7 @@ msgstr "Актуализирай"
 msgid "Updated"
 msgstr "Актуализирано"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Updated every 10 minutes."
 msgstr "Актуализира се на всеки 10 минути."

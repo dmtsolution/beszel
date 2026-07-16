@@ -18,6 +18,7 @@ import (
 	"github.com/henrygd/beszel/internal/hub/ws"
 
 	"github.com/henrygd/beszel/internal/entities/container"
+	"github.com/henrygd/beszel/internal/entities/dirusage"
 	"github.com/henrygd/beszel/internal/entities/smart"
 	"github.com/henrygd/beszel/internal/entities/system"
 	"github.com/henrygd/beszel/internal/entities/systemd"
@@ -231,6 +232,13 @@ func (sys *System) createRecords(data *system.CombinedData) (*core.Record, error
 			}
 		}
 
+		// add new dir_usage records
+		if len(data.DirUsage) > 0 {
+			if err := createDirUsageRecords(txApp, data.DirUsage, sys.Id); err != nil {
+				return err
+			}
+		}
+
 		// add system details record
 		if data.Details != nil {
 			if err := createSystemDetailsRecord(txApp, data.Details, sys.Id); err != nil {
@@ -300,6 +308,33 @@ func createSystemdStatsRecords(app core.App, data []*systemd.Service, systemId s
 	}
 	queryString := fmt.Sprintf(
 		"INSERT INTO systemd_services (id, system, name, state, sub, cpu, cpuPeak, memory, memPeak, updated) VALUES %s ON CONFLICT(id) DO UPDATE SET system = excluded.system, name = excluded.name, state = excluded.state, sub = excluded.sub, cpu = excluded.cpu, cpuPeak = excluded.cpuPeak, memory = excluded.memory, memPeak = excluded.memPeak, updated = excluded.updated",
+		strings.Join(valueStrings, ","),
+	)
+	_, err := app.DB().NewQuery(queryString).Bind(params).Execute()
+	return err
+}
+
+// createDirUsageRecords creates/updates dir_usage records (one per system+path)
+func createDirUsageRecords(app core.App, data []*dirusage.Entry, systemId string) error {
+	if len(data) == 0 {
+		return nil
+	}
+	// shared params for all records
+	params := dbx.Params{
+		"system":  systemId,
+		"updated": time.Now().UTC().UnixMilli(),
+	}
+
+	valueStrings := make([]string, 0, len(data))
+	for i, entry := range data {
+		suffix := fmt.Sprintf("%d", i)
+		valueStrings = append(valueStrings, fmt.Sprintf("({:id%[1]s}, {:system}, {:path%[1]s}, {:size%[1]s}, {:updated})", suffix))
+		params["id"+suffix] = makeStableHashId(systemId, entry.Path)
+		params["path"+suffix] = entry.Path
+		params["size"+suffix] = entry.Size
+	}
+	queryString := fmt.Sprintf(
+		"INSERT INTO dir_usage (id, system, path, size, updated) VALUES %s ON CONFLICT(id) DO UPDATE SET system = excluded.system, path = excluded.path, size = excluded.size, updated = excluded.updated",
 		strings.Join(valueStrings, ","),
 	)
 	_, err := app.DB().NewQuery(queryString).Bind(params).Execute()

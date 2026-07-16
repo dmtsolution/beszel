@@ -593,6 +593,10 @@ msgstr "Ayrıntı"
 msgid "Device"
 msgstr "Cihaz"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Directories"
+msgstr ""
+
 #. Context: Battery state
 #: src/lib/i18n.ts
 msgid "Discharging"
@@ -717,7 +721,6 @@ msgstr "Tek kullanımlık şifrenizi girin."
 msgid "Ephemeral"
 msgstr "Geçici"
 
-#: src/components/login/auth-form.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/config-yaml.tsx
 #: src/components/routes/settings/heartbeat.tsx
@@ -810,6 +813,7 @@ msgid "Failed: {0}"
 msgstr "Başarısız: {0}"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1119,6 +1123,7 @@ msgstr "Sonuç bulunamadı."
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1213,6 +1218,10 @@ msgstr "Şifre sıfırlama isteği alındı"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Past"
 msgstr "Geçmiş"
+
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Path"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
@@ -1510,6 +1519,10 @@ msgstr "Ayarlar kaydedildi"
 msgid "Sign in"
 msgstr "Giriş yap"
 
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Size"
+msgstr ""
+
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
 msgstr "SMTP ayarları"
@@ -1549,6 +1562,11 @@ msgstr "Sistem tarafından kullanılan takas alanı"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap Usage"
 msgstr "Takas Kullanımı"
+
+#: src/components/mode-toggle.tsx
+#: src/components/mode-toggle.tsx
+msgid "Switch theme"
+msgstr ""
 
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
@@ -1659,8 +1677,8 @@ msgstr "E-posta(lar)a"
 
 #: src/components/mode-toggle.tsx
 #: src/components/mode-toggle.tsx
-msgid "Toggle theme"
-msgstr "Temayı değiştir"
+#~ msgid "Toggle theme"
+#~ msgstr "Temayı değiştir"
 
 #: src/components/add-system.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1703,6 +1721,11 @@ msgstr ""
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "Toplam: {0}"
+
+#. placeholder {0}: totalValue.toFixed(1)
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Total: {0} {totalUnit}"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Triggered by"
@@ -1806,6 +1829,7 @@ msgstr "Güncelle"
 msgid "Updated"
 msgstr "Güncellendi"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Updated every 10 minutes."
 msgstr "Her 10 dakikada bir güncellenir."

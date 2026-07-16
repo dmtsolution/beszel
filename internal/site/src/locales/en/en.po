@@ -588,6 +588,10 @@ msgstr "Detail"
 msgid "Device"
 msgstr "Device"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Directories"
+msgstr "Directories"
+
 #. Context: Battery state
 #: src/lib/i18n.ts
 msgid "Discharging"
@@ -712,7 +716,6 @@ msgstr "Enter your one-time password."
 msgid "Ephemeral"
 msgstr "Ephemeral"
 
-#: src/components/login/auth-form.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/config-yaml.tsx
 #: src/components/routes/settings/heartbeat.tsx
@@ -805,6 +808,7 @@ msgid "Failed: {0}"
 msgstr "Failed: {0}"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1114,6 +1118,7 @@ msgstr "No results found."
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1208,6 +1213,10 @@ msgstr "Password reset request received"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Past"
 msgstr "Past"
+
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Path"
+msgstr "Path"
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
@@ -1505,6 +1514,10 @@ msgstr "Settings saved"
 msgid "Sign in"
 msgstr "Sign in"
 
+#: src/components/dir-usage-table/dir-usage-table-columns.tsx
+msgid "Size"
+msgstr "Size"
+
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
 msgstr "SMTP settings"
@@ -1544,6 +1557,11 @@ msgstr "Swap space used by the system"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap Usage"
 msgstr "Swap Usage"
+
+#: src/components/mode-toggle.tsx
+#: src/components/mode-toggle.tsx
+msgid "Switch theme"
+msgstr "Switch theme"
 
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
@@ -1654,8 +1672,8 @@ msgstr "To email(s)"
 
 #: src/components/mode-toggle.tsx
 #: src/components/mode-toggle.tsx
-msgid "Toggle theme"
-msgstr "Toggle theme"
+#~ msgid "Toggle theme"
+#~ msgstr "Toggle theme"
 
 #: src/components/add-system.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1698,6 +1716,11 @@ msgstr "Total time spent on read/write (can exceed 100%)"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
 msgstr "Total: {0}"
+
+#. placeholder {0}: totalValue.toFixed(1)
+#: src/components/dir-usage-table/dir-usage-table.tsx
+msgid "Total: {0} {totalUnit}"
+msgstr "Total: {0} {totalUnit}"
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Triggered by"
@@ -1801,6 +1824,7 @@ msgstr "Update"
 msgid "Updated"
 msgstr "Updated"
 
+#: src/components/dir-usage-table/dir-usage-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Updated every 10 minutes."
 msgstr "Updated every 10 minutes."
