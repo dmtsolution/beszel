@@ -255,8 +255,8 @@ msgstr ""
 
 #. Battery label in systems table header
 #: src/components/systems-table/systems-table-columns.tsx
-msgid "Bat"
-msgstr "باتری"
+#~ msgid "Bat"
+#~ msgstr "باتری"
 
 #: src/components/routes/system/charts/sensor-charts.tsx
 #: src/lib/alerts.ts
@@ -604,6 +604,10 @@ msgstr "توضیحات"
 msgid "Detail"
 msgstr "جزئیات"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Details"
+msgstr ""
+
 #: src/components/routes/system/smart-table.tsx
 msgid "Device"
 msgstr "دستگاه"
@@ -885,8 +889,8 @@ msgid "Global"
 msgstr "جهانی"
 
 #: src/components/routes/system.tsx
-msgid "GPU"
-msgstr "پردازنده گرافیکی"
+#~ msgid "GPU"
+#~ msgstr "پردازنده گرافیکی"
 
 #: src/components/routes/system/charts/gpu-charts.tsx
 msgid "GPU Engines"
@@ -1754,9 +1758,7 @@ msgstr "تب‌ها"
 msgid "Tasks"
 msgstr "وظایف"
 
-#. Temperature label in systems table
 #: src/components/routes/system/smart-table.tsx
-#: src/components/systems-table/systems-table-columns.tsx
 msgid "Temp"
 msgstr "دما"
 

@@ -255,8 +255,8 @@ msgstr ""
 
 #. Battery label in systems table header
 #: src/components/systems-table/systems-table-columns.tsx
-msgid "Bat"
-msgstr "Pin"
+#~ msgid "Bat"
+#~ msgstr "Pin"
 
 #: src/components/routes/system/charts/sensor-charts.tsx
 #: src/lib/alerts.ts
@@ -604,6 +604,10 @@ msgstr "Mô tả"
 msgid "Detail"
 msgstr "Chi tiết"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Details"
+msgstr ""
+
 #: src/components/routes/system/smart-table.tsx
 msgid "Device"
 msgstr "Thiết bị"
@@ -885,8 +889,8 @@ msgid "Global"
 msgstr "Toàn cầu"
 
 #: src/components/routes/system.tsx
-msgid "GPU"
-msgstr ""
+#~ msgid "GPU"
+#~ msgstr ""
 
 #: src/components/routes/system/charts/gpu-charts.tsx
 msgid "GPU Engines"
@@ -1754,9 +1758,7 @@ msgstr "Tab"
 msgid "Tasks"
 msgstr "Tác vụ"
 
-#. Temperature label in systems table
 #: src/components/routes/system/smart-table.tsx
-#: src/components/systems-table/systems-table-columns.tsx
 msgid "Temp"
 msgstr "Nhiệt độ"
 

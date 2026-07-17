@@ -192,6 +192,7 @@ export function SystemsTableColumns(viewMode: "table" | "grid"): ColumnDef<Syste
 			Icon: HardDriveIcon,
 			header: sortableHeader,
 		},
+		/* GPU column hidden - not needed for this fleet
 		{
 			accessorFn: ({ info }) => info.g || undefined,
 			id: "gpu",
@@ -202,6 +203,7 @@ export function SystemsTableColumns(viewMode: "table" | "grid"): ColumnDef<Syste
 			Icon: GpuIcon,
 			header: sortableHeader,
 		},
+		*/
 		{
 			id: "loadAverage",
 			accessorFn: ({ info }) => info.la?.reduce((acc, curr) => acc + curr, 0),
@@ -262,6 +264,7 @@ export function SystemsTableColumns(viewMode: "table" | "grid"): ColumnDef<Syste
 				)
 			},
 		},
+		/* Temperature column hidden - not needed for this fleet
 		{
 			accessorFn: ({ info }) => info.dt,
 			id: "temp",
@@ -284,6 +287,8 @@ export function SystemsTableColumns(viewMode: "table" | "grid"): ColumnDef<Syste
 				)
 			},
 		},
+		*/
+		/* Battery column hidden - not needed for this fleet
 		{
 			accessorFn: ({ info }) => info.bat?.[0],
 			id: "battery",
@@ -330,6 +335,7 @@ export function SystemsTableColumns(viewMode: "table" | "grid"): ColumnDef<Syste
 				)
 			},
 		},
+		*/
 		{
 			accessorFn: ({ info }) => info.sv?.[0],
 			id: "services",

@@ -255,8 +255,8 @@ msgstr ""
 
 #. Battery label in systems table header
 #: src/components/systems-table/systems-table-columns.tsx
-msgid "Bat"
-msgstr "电池"
+#~ msgid "Bat"
+#~ msgstr "电池"
 
 #: src/components/routes/system/charts/sensor-charts.tsx
 #: src/lib/alerts.ts
@@ -604,6 +604,10 @@ msgstr "描述"
 msgid "Detail"
 msgstr "详情"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Details"
+msgstr ""
+
 #: src/components/routes/system/smart-table.tsx
 msgid "Device"
 msgstr "设备"
@@ -885,8 +889,8 @@ msgid "Global"
 msgstr "全局"
 
 #: src/components/routes/system.tsx
-msgid "GPU"
-msgstr ""
+#~ msgid "GPU"
+#~ msgstr ""
 
 #: src/components/routes/system/charts/gpu-charts.tsx
 msgid "GPU Engines"
@@ -1754,9 +1758,7 @@ msgstr "标签页"
 msgid "Tasks"
 msgstr "任务数"
 
-#. Temperature label in systems table
 #: src/components/routes/system/smart-table.tsx
-#: src/components/systems-table/systems-table-columns.tsx
 msgid "Temp"
 msgstr "温度"
 

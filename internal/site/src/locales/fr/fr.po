@@ -255,8 +255,8 @@ msgstr "Banni"
 
 #. Battery label in systems table header
 #: src/components/systems-table/systems-table-columns.tsx
-msgid "Bat"
-msgstr ""
+#~ msgid "Bat"
+#~ msgstr ""
 
 #: src/components/routes/system/charts/sensor-charts.tsx
 #: src/lib/alerts.ts
@@ -604,6 +604,10 @@ msgstr ""
 msgid "Detail"
 msgstr "Détail"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Details"
+msgstr "Détails"
+
 #: src/components/routes/system/smart-table.tsx
 msgid "Device"
 msgstr "Appareil"
@@ -885,8 +889,8 @@ msgid "Global"
 msgstr ""
 
 #: src/components/routes/system.tsx
-msgid "GPU"
-msgstr ""
+#~ msgid "GPU"
+#~ msgstr ""
 
 #: src/components/routes/system/charts/gpu-charts.tsx
 msgid "GPU Engines"
@@ -1754,9 +1758,7 @@ msgstr "Onglets"
 msgid "Tasks"
 msgstr "Tâches"
 
-#. Temperature label in systems table
 #: src/components/routes/system/smart-table.tsx
-#: src/components/systems-table/systems-table-columns.tsx
 msgid "Temp"
 msgstr "Temp."
 

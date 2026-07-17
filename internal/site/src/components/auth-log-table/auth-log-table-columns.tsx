@@ -149,7 +149,7 @@ export function makeAuthLogTableCols(openSheet: (record: AuthLogRecord) => void)
 			id: "view",
 			size: 40,
 			enableSorting: false,
-			header: () => null,
+			header: () => <span className="flex justify-center text-xs text-muted-foreground">{t`Details`}</span>,
 			cell: ({ row }) => (
 				<div className="flex justify-center">
 					<Button
