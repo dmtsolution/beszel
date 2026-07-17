@@ -804,6 +804,10 @@ msgstr "Misslyckades"
 msgid "Failed Attributes:"
 msgstr "Misslyckade attribut:"
 
+#: src/components/routes/dashboard.tsx
+msgid "Failed services"
+msgstr ""
+
 #: src/lib/api.ts
 msgid "Failed to authenticate"
 msgstr "Autentisering misslyckades"
@@ -1238,6 +1242,10 @@ msgstr "Eller fortsätt med"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Other"
 msgstr "Annat"
+
+#: src/components/routes/dashboard.tsx
+msgid "Overview of your systems' activity and security."
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "Overwrite existing alerts"

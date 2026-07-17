@@ -804,6 +804,10 @@ msgstr "실패"
 msgid "Failed Attributes:"
 msgstr "실패한 속성:"
 
+#: src/components/routes/dashboard.tsx
+msgid "Failed services"
+msgstr ""
+
 #: src/lib/api.ts
 msgid "Failed to authenticate"
 msgstr "인증 실패"
@@ -1238,6 +1242,10 @@ msgstr "또는 아래 항목으로 진행하기"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Other"
 msgstr "기타"
+
+#: src/components/routes/dashboard.tsx
+msgid "Overview of your systems' activity and security."
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "Overwrite existing alerts"

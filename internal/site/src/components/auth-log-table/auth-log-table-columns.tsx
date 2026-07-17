@@ -81,28 +81,8 @@ export function getAuthEventColor(type: AuthEventType, statusCode?: number) {
 export function makeAuthLogTableCols(openSheet: (record: AuthLogRecord) => void): ColumnDef<AuthLogRecord>[] {
 	return [
 		{
-			id: "view",
-			size: 44,
-			enableSorting: false,
-			header: () => null,
-			cell: ({ row }) => (
-				<Button
-					variant="ghost"
-					size="icon"
-					className="size-8 text-muted-foreground"
-					aria-label={t`View details`}
-					onClick={(e) => {
-						e.stopPropagation()
-						openSheet(row.original)
-					}}
-				>
-					<EyeIcon className="size-4" />
-				</Button>
-			),
-		},
-		{
 			id: "time",
-			size: 190,
+			size: 180,
 			accessorFn: (record) => record.time,
 			header: ({ column }) => <HeaderButton column={column} name={t`Time`} Icon={ClockIcon} />,
 			cell: ({ getValue }) => {
@@ -116,7 +96,7 @@ export function makeAuthLogTableCols(openSheet: (record: AuthLogRecord) => void)
 		},
 		{
 			id: "type",
-			size: 170,
+			size: 160,
 			accessorFn: (record) => record.type,
 			header: ({ column }) => <HeaderButton column={column} name={t`Event`} Icon={ShieldIcon} />,
 			cell: ({ row }) => {
@@ -133,7 +113,7 @@ export function makeAuthLogTableCols(openSheet: (record: AuthLogRecord) => void)
 		},
 		{
 			id: "user",
-			size: 120,
+			size: 110,
 			accessorFn: (record) => record.user,
 			header: ({ column }) => <HeaderButton column={column} name={t`User`} Icon={UserIcon} />,
 			cell: ({ getValue }) => {
@@ -143,7 +123,7 @@ export function makeAuthLogTableCols(openSheet: (record: AuthLogRecord) => void)
 		},
 		{
 			id: "source_ip",
-			size: 140,
+			size: 130,
 			accessorFn: (record) => record.source_ip,
 			header: ({ column }) => <HeaderButton column={column} name={t`Source IP`} Icon={KeyRoundIcon} />,
 			cell: ({ getValue }) => {
@@ -153,7 +133,7 @@ export function makeAuthLogTableCols(openSheet: (record: AuthLogRecord) => void)
 		},
 		{
 			id: "path",
-			size: 260,
+			size: 320,
 			accessorFn: (record) => record.path || record.detail,
 			header: ({ column }) => <HeaderButton column={column} name={t`Path / Detail`} Icon={FolderIcon} />,
 			cell: ({ row }) => {
@@ -164,6 +144,28 @@ export function makeAuthLogTableCols(openSheet: (record: AuthLogRecord) => void)
 					</span>
 				)
 			},
+		},
+		{
+			id: "view",
+			size: 40,
+			enableSorting: false,
+			header: () => null,
+			cell: ({ row }) => (
+				<div className="flex justify-center">
+					<Button
+						variant="ghost"
+						size="icon"
+						className="size-7 text-muted-foreground"
+						aria-label={t`View details`}
+						onClick={(e) => {
+							e.stopPropagation()
+							openSheet(row.original)
+						}}
+					>
+						<EyeIcon className="size-4" />
+					</Button>
+				</div>
+			),
 		},
 	]
 }

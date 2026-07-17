@@ -804,6 +804,10 @@ msgstr "Mislykkedes"
 msgid "Failed Attributes:"
 msgstr "Mislykkede attributter:"
 
+#: src/components/routes/dashboard.tsx
+msgid "Failed services"
+msgstr ""
+
 #: src/lib/api.ts
 msgid "Failed to authenticate"
 msgstr "Kunne ikke godkende"
@@ -1238,6 +1242,10 @@ msgstr "Eller fortsæt med"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Other"
 msgstr "Andre"
+
+#: src/components/routes/dashboard.tsx
+msgid "Overview of your systems' activity and security."
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "Overwrite existing alerts"

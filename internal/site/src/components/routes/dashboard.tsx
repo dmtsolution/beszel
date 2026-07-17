@@ -1,17 +1,16 @@
 import { Trans } from "@lingui/react/macro"
 import { useStore } from "@nanostores/react"
 import { getPagePath } from "@nanostores/router"
-import { AlertTriangleIcon, BanIcon, KeySquareIcon, ServerIcon, ShieldAlertIcon } from "lucide-react"
+import { AlertTriangleIcon, BanIcon, KeySquareIcon, ServerIcon, ShieldAlertIcon, XCircleIcon } from "lucide-react"
 import { memo, useEffect, useState } from "react"
 import { ActiveAlerts } from "@/components/active-alerts"
 import { FooterRepoLink } from "@/components/footer-repo-link"
 import { $router, Link } from "@/components/router"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { pb } from "@/lib/api"
-import { AuthEventType } from "@/lib/enums"
+import { AuthEventType, SystemStatus } from "@/lib/enums"
 import { $allSystemsById } from "@/lib/stores"
 import { cn } from "@/lib/utils"
-import { SystemStatus } from "@/lib/enums"
 
 const DAY_SECONDS = 86400
 
@@ -72,6 +71,7 @@ export default memo(function Dashboard() {
 	const systems = Object.values(allSystems)
 	const systemsUp = systems.filter((s) => s.status === SystemStatus.Up).length
 	const systemsDown = systems.filter((s) => s.status === SystemStatus.Down).length
+	const failedServices = systems.reduce((sum, s) => sum + (s.info.sv?.[1] ?? 0), 0)
 
 	const [sshSuccess, setSshSuccess] = useState<number | null>(null)
 	const [sshFailed, setSshFailed] = useState<number | null>(null)
@@ -95,48 +95,64 @@ export default memo(function Dashboard() {
 	return (
 		<>
 			<div className="flex flex-col gap-4">
-				<div>
-					<h1 className="text-2xl sm:text-[1.6rem] font-semibold mb-3">
-						<Trans>Dashboard</Trans>
-					</h1>
-					<div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
-						<StatTile
-							title={<Trans>Systems up</Trans>}
-							value={`${systemsUp} / ${systems.length}`}
-							icon={ServerIcon}
-							color={systemsDown > 0 ? "warning" : "good"}
-							href={getPagePath($router, "systems")}
-						/>
-						<StatTile
-							title={<Trans>SSH logins (24h)</Trans>}
-							value={dash(sshSuccess)}
-							icon={KeySquareIcon}
-							color="good"
-							href={firstSystemId && getPagePath($router, "system_logs", { id: firstSystemId })}
-						/>
-						<StatTile
-							title={<Trans>SSH failures (24h)</Trans>}
-							value={dash(sshFailed)}
-							icon={ShieldAlertIcon}
-							color={sshFailed ? "warning" : undefined}
-							href={firstSystemId && getPagePath($router, "system_logs", { id: firstSystemId })}
-						/>
-						<StatTile
-							title={<Trans>IPs banned (24h)</Trans>}
-							value={dash(banned)}
-							icon={BanIcon}
-							color={banned ? "critical" : undefined}
-							href={firstSystemId && getPagePath($router, "system_logs", { id: firstSystemId })}
-						/>
-						<StatTile
-							title={<Trans>Suspicious requests (24h)</Trans>}
-							value={dash(suspicious)}
-							icon={AlertTriangleIcon}
-							color={suspicious ? "critical" : undefined}
-							href={firstSystemId && getPagePath($router, "system_logs", { id: firstSystemId })}
-						/>
-					</div>
-				</div>
+				<Card className="px-3 py-5 sm:py-6 sm:px-6">
+					<CardHeader className="p-0 mb-4">
+						<div className="px-2 sm:px-1">
+							<CardTitle className="mb-1.5">
+								<Trans>Dashboard</Trans>
+							</CardTitle>
+							<CardDescription>
+								<Trans>Overview of your systems' activity and security.</Trans>
+							</CardDescription>
+						</div>
+					</CardHeader>
+					<CardContent className="p-0">
+						<div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
+							<StatTile
+								title={<Trans>Systems up</Trans>}
+								value={`${systemsUp} / ${systems.length}`}
+								icon={ServerIcon}
+								color={systemsDown > 0 ? "warning" : "good"}
+								href={getPagePath($router, "systems")}
+							/>
+							<StatTile
+								title={<Trans>Failed services</Trans>}
+								value={failedServices}
+								icon={XCircleIcon}
+								color={failedServices > 0 ? "critical" : "good"}
+								href={getPagePath($router, "systems")}
+							/>
+							<StatTile
+								title={<Trans>SSH logins (24h)</Trans>}
+								value={dash(sshSuccess)}
+								icon={KeySquareIcon}
+								color="good"
+								href={firstSystemId && getPagePath($router, "system_logs", { id: firstSystemId })}
+							/>
+							<StatTile
+								title={<Trans>SSH failures (24h)</Trans>}
+								value={dash(sshFailed)}
+								icon={ShieldAlertIcon}
+								color={sshFailed ? "warning" : undefined}
+								href={firstSystemId && getPagePath($router, "system_logs", { id: firstSystemId })}
+							/>
+							<StatTile
+								title={<Trans>IPs banned (24h)</Trans>}
+								value={dash(banned)}
+								icon={BanIcon}
+								color={banned ? "critical" : undefined}
+								href={firstSystemId && getPagePath($router, "system_logs", { id: firstSystemId })}
+							/>
+							<StatTile
+								title={<Trans>Suspicious requests (24h)</Trans>}
+								value={dash(suspicious)}
+								icon={AlertTriangleIcon}
+								color={suspicious ? "critical" : undefined}
+								href={firstSystemId && getPagePath($router, "system_logs", { id: firstSystemId })}
+							/>
+						</div>
+					</CardContent>
+				</Card>
 				<ActiveAlerts />
 			</div>
 			<FooterRepoLink />

@@ -804,6 +804,10 @@ msgstr "Neuspješno"
 msgid "Failed Attributes:"
 msgstr "Neuspjeli atributi:"
 
+#: src/components/routes/dashboard.tsx
+msgid "Failed services"
+msgstr ""
+
 #: src/lib/api.ts
 msgid "Failed to authenticate"
 msgstr "Neuspješna provjera autentičnosti"
@@ -1238,6 +1242,10 @@ msgstr "Ili nastavi s"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Other"
 msgstr "Ostalo"
+
+#: src/components/routes/dashboard.tsx
+msgid "Overview of your systems' activity and security."
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "Overwrite existing alerts"

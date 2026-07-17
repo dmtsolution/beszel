@@ -804,6 +804,10 @@ msgstr "ناموفق"
 msgid "Failed Attributes:"
 msgstr "ویژگی‌های ناموفق:"
 
+#: src/components/routes/dashboard.tsx
+msgid "Failed services"
+msgstr ""
+
 #: src/lib/api.ts
 msgid "Failed to authenticate"
 msgstr "احراز هویت ناموفق بود"
@@ -1238,6 +1242,10 @@ msgstr "یا ادامه با"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Other"
 msgstr "سایر"
+
+#: src/components/routes/dashboard.tsx
+msgid "Overview of your systems' activity and security."
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "Overwrite existing alerts"

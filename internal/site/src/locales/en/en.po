@@ -799,6 +799,10 @@ msgstr "Failed"
 msgid "Failed Attributes:"
 msgstr "Failed Attributes:"
 
+#: src/components/routes/dashboard.tsx
+msgid "Failed services"
+msgstr "Failed services"
+
 #: src/lib/api.ts
 msgid "Failed to authenticate"
 msgstr "Failed to authenticate"
@@ -1233,6 +1237,10 @@ msgstr "Or continue with"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Other"
 msgstr "Other"
+
+#: src/components/routes/dashboard.tsx
+msgid "Overview of your systems' activity and security."
+msgstr "Overview of your systems' activity and security."
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "Overwrite existing alerts"

@@ -804,6 +804,10 @@ msgstr "Falhou"
 msgid "Failed Attributes:"
 msgstr "Atributos com Falha:"
 
+#: src/components/routes/dashboard.tsx
+msgid "Failed services"
+msgstr ""
+
 #: src/lib/api.ts
 msgid "Failed to authenticate"
 msgstr "Falha na autenticação"
@@ -1238,6 +1242,10 @@ msgstr "Ou continue com"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Other"
 msgstr "Outro"
+
+#: src/components/routes/dashboard.tsx
+msgid "Overview of your systems' activity and security."
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "Overwrite existing alerts"

@@ -804,6 +804,10 @@ msgstr "Échoué"
 msgid "Failed Attributes:"
 msgstr "Attributs défaillants :"
 
+#: src/components/routes/dashboard.tsx
+msgid "Failed services"
+msgstr "Services en échec"
+
 #: src/lib/api.ts
 msgid "Failed to authenticate"
 msgstr "Échec de l'authentification"
@@ -1238,6 +1242,10 @@ msgstr "Ou continuer avec"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Other"
 msgstr "Autre"
+
+#: src/components/routes/dashboard.tsx
+msgid "Overview of your systems' activity and security."
+msgstr "Vue d'ensemble de l'activité et de la sécurité de vos systèmes."
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "Overwrite existing alerts"
