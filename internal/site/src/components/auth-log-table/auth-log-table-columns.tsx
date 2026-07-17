@@ -12,7 +12,7 @@ function HeaderButton({ column, name, Icon }: { column: Column<AuthLogRecord>; n
 	return (
 		<Button
 			className={cn(
-				"h-9 px-3 flex items-center gap-2 duration-50",
+				"h-9 px-3 flex items-center justify-start gap-2 duration-50 w-full",
 				isSorted && "bg-accent/70 light:bg-accent text-accent-foreground/90"
 			)}
 			variant="ghost"

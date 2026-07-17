@@ -31,7 +31,6 @@ import type { AuthLogRecord } from "@/types"
 import { Separator } from "../ui/separator"
 
 const MAX_EVENTS = 500
-const DAY_SECONDS = 86400
 
 type Period = "1h" | "24h" | "7d" | "30d" | "all" | "custom"
 
@@ -65,7 +64,7 @@ export default function AuthLogTable({ systemId, alwaysShow }: { systemId?: stri
 	const [globalFilter, setGlobalFilter] = useState("")
 	const [selectedTypes, setSelectedTypes] = useState<Set<AuthEventType>>(new Set())
 	const [period, setPeriod] = useBrowserStorage<Period>("logs-period", "24h", sessionStorage)
-	const [customDate, setCustomDate] = useState("")
+	const [customDateTime, setCustomDateTime] = useState("")
 
 	const [sheetOpen, setSheetOpen] = useState(false)
 	const activeEvent = useRef<AuthLogRecord | null>(null)
@@ -112,17 +111,16 @@ export default function AuthLogTable({ systemId, alwaysShow }: { systemId?: stri
 			out = out.filter((d) => selectedTypes.has(d.type as AuthEventType))
 		}
 		if (period === "custom") {
-			if (customDate) {
-				const dayStart = new Date(`${customDate}T00:00:00`).getTime() / 1000
-				const dayEnd = dayStart + DAY_SECONDS
-				out = out.filter((d) => d.time >= dayStart && d.time < dayEnd)
+			if (customDateTime) {
+				const cutoff = new Date(customDateTime).getTime() / 1000
+				out = out.filter((d) => d.time >= cutoff)
 			}
 		} else if (period !== "all") {
 			const cutoff = Date.now() / 1000 - periodSeconds[period]
 			out = out.filter((d) => d.time >= cutoff)
 		}
 		return out
-	}, [data, selectedTypes, period, customDate])
+	}, [data, selectedTypes, period, customDateTime])
 
 	const table = useReactTable({
 		data: filteredData,
@@ -223,10 +221,10 @@ export default function AuthLogTable({ systemId, alwaysShow }: { systemId?: stri
 						</Select>
 						{period === "custom" && (
 							<input
-								type="date"
-								value={customDate}
-								onChange={(e) => setCustomDate(e.target.value)}
-								className="h-9 px-3 rounded-md border bg-transparent text-sm w-full sm:w-40"
+								type="datetime-local"
+								value={customDateTime}
+								onChange={(e) => setCustomDateTime(e.target.value)}
+								className="h-9 px-3 rounded-md border bg-transparent text-sm w-full sm:w-56"
 							/>
 						)}
 						<Input

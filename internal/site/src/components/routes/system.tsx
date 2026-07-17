@@ -144,13 +144,29 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 
 				<ExtraFsCharts systemData={systemData} />
 
-				<LazyDirUsageTable systemId={system.id} />
+				<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
+					<div className={cn(!grid && "xl:col-span-2")}>
+						<LazyDirUsageTable systemId={system.id} />
+					</div>
 
-				{maybeHasSmartData && <LazySmartTable systemId={system.id} />}
+					{maybeHasSmartData && (
+						<div className={cn(!grid && "xl:col-span-2")}>
+							<LazySmartTable systemId={system.id} />
+						</div>
+					)}
 
-				{hasContainersTable && <LazyContainersTable systemId={system.id} />}
+					{hasContainersTable && (
+						<div className={cn(!grid && "xl:col-span-2")}>
+							<LazyContainersTable systemId={system.id} />
+						</div>
+					)}
 
-				{hasSystemd && <LazySystemdTable systemId={system.id} />}
+					{hasSystemd && (
+						<div className={cn(!grid && "xl:col-span-2")}>
+							<LazySystemdTable systemId={system.id} />
+						</div>
+					)}
+				</div>
 			</>
 		)
 	}
@@ -209,8 +225,16 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 								<RootDiskCharts systemData={systemData} />
 							</div>
 							<ExtraFsCharts systemData={systemData} />
-							<LazyDirUsageTable systemId={system.id} />
-							{maybeHasSmartData && <LazySmartTable systemId={system.id} />}
+							<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
+								<div className={cn(!grid && "xl:col-span-2")}>
+									<LazyDirUsageTable systemId={system.id} />
+								</div>
+								{maybeHasSmartData && (
+									<div className={cn(!grid && "xl:col-span-2")}>
+										<LazySmartTable systemId={system.id} />
+									</div>
+								)}
+							</div>
 						</>
 					)}
 				</TabsContent>
@@ -260,7 +284,13 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 										networkConfig={containerChartConfigs.network}
 									/>
 								</div>
-								{hasContainersTable && <ContainersTable systemId={system.id} />}
+								{hasContainersTable && (
+									<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
+										<div className={cn(!grid && "xl:col-span-2")}>
+											<ContainersTable systemId={system.id} />
+										</div>
+									</div>
+								)}
 							</>
 						)}
 					</TabsContent>
@@ -268,7 +298,13 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 
 				{hasSystemd && (
 					<TabsContent value="services" forceMount className={activeTab === "services" ? "contents" : "hidden"}>
-						{mountedTabs.has("services") && <SystemdTable systemId={system.id} />}
+						{mountedTabs.has("services") && (
+							<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
+								<div className={cn(!grid && "xl:col-span-2")}>
+									<SystemdTable systemId={system.id} />
+								</div>
+							</div>
+						)}
 					</TabsContent>
 				)}
 			</Tabs>
