@@ -554,6 +554,10 @@ msgstr "Cumulative Upload"
 msgid "Current state"
 msgstr "Current state"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Custom date..."
+msgstr "Custom date..."
+
 #. Power Cycles
 #: src/components/routes/system/smart-table.tsx
 msgid "Cycles"

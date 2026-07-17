@@ -218,7 +218,11 @@ function DirUsageTableHead({ table }: { table: TableType<DirUsageRecord> }) {
 			{table.getHeaderGroups().map((headerGroup) => (
 				<tr key={headerGroup.id}>
 					{headerGroup.headers.map((header) => (
-						<TableHead className="px-2" key={header.id} style={{ width: header.getSize() }}>
+						<TableHead
+							className="px-2"
+							key={header.id}
+							style={{ width: header.column.id === "path" ? "auto" : header.getSize() }}
+						>
 							{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
 						</TableHead>
 					))}
@@ -243,7 +247,7 @@ const DirUsageTableRow = memo(function DirUsageTableRow({
 					className="py-0"
 					style={{
 						height: virtualRow.size,
-						width: cell.column.getSize(),
+						width: cell.column.id === "path" ? "auto" : cell.column.getSize(),
 					}}
 				>
 					{flexRender(cell.column.columnDef.cell, cell.getContext())}

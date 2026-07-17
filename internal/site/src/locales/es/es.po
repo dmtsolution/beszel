@@ -559,6 +559,10 @@ msgstr "Carga acumulada"
 msgid "Current state"
 msgstr "Estado actual"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Custom date..."
+msgstr ""
+
 #. Power Cycles
 #: src/components/routes/system/smart-table.tsx
 msgid "Cycles"

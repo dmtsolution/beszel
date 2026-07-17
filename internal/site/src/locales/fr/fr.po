@@ -559,6 +559,10 @@ msgstr "Téléversement cumulatif"
 msgid "Current state"
 msgstr "État actuel"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Custom date..."
+msgstr "Date personnalisée..."
+
 #. Power Cycles
 #: src/components/routes/system/smart-table.tsx
 msgid "Cycles"
