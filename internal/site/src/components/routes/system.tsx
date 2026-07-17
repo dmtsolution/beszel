@@ -68,7 +68,8 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 
 	// keep tabsRef in sync for keyboard navigation
 	const tabs = ["core", "disk"]
-	if (hasGpu) tabs.push("gpu")
+	// GPU tab hidden - not needed for this fleet (see hasGpu below)
+	// if (hasGpu) tabs.push("gpu")
 	if (hasContainers) tabs.push("containers")
 	if (hasSystemd) tabs.push("services")
 	tabsRef.current = tabs
@@ -123,14 +124,15 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 
 					<LoadAverageChart chartData={chartData} grid={grid} dataEmpty={dataEmpty} />
 
-					<TemperatureChart {...coreProps} />
+					{/* GPU/Temperature/Battery hidden - not needed for this fleet */}
+					{/* <TemperatureChart {...coreProps} /> */}
 
-					<BatteryChart {...coreProps} />
+					{/* <BatteryChart {...coreProps} /> */}
 
-					{hasGpuPowerData && <GpuPowerChart chartData={chartData} grid={grid} dataEmpty={dataEmpty} />}
+					{/* {hasGpuPowerData && <GpuPowerChart chartData={chartData} grid={grid} dataEmpty={dataEmpty} />} */}
 				</div>
 
-				{hasGpuData && lastGpus && (
+				{/* {hasGpuData && lastGpus && (
 					<GpuDetailCharts
 						chartData={chartData}
 						grid={grid}
@@ -138,7 +140,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 						lastGpus={lastGpus as Record<string, GPUData>}
 						hasGpuEnginesData={hasGpuEnginesData}
 					/>
-				)}
+				)} */}
 
 				<ExtraFsCharts systemData={systemData} />
 
@@ -165,12 +167,13 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 						<HardDriveIcon className="size-3.5" />
 						<Trans>Disk</Trans>
 					</TabsTrigger>
+					{/* GPU tab hidden - not needed for this fleet
 					{hasGpu && (
 						<TabsTrigger value="gpu" className="w-full flex items-center gap-2">
 							<GpuIcon className="size-3.5" />
 							<Trans>GPU</Trans>
 						</TabsTrigger>
-					)}
+					)} */}
 					{hasContainers && (
 						<TabsTrigger value="containers" className="w-full flex items-center gap-2">
 							<ContainerIcon className="size-3.5" />
@@ -191,8 +194,9 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 						<MemoryChart {...coreProps} />
 						<LoadAverageChart chartData={chartData} grid={grid} dataEmpty={dataEmpty} />
 						<BandwidthChart {...coreProps} systemStats={systemStats} />
-						<TemperatureChart {...coreProps} setPageBottomExtraMargin={setPageBottomExtraMargin} />
-						<BatteryChart {...coreProps} />
+						{/* GPU/Temperature/Battery hidden - not needed for this fleet */}
+						{/* <TemperatureChart {...coreProps} setPageBottomExtraMargin={setPageBottomExtraMargin} /> */}
+						{/* <BatteryChart {...coreProps} /> */}
 						<SwapChart chartData={chartData} grid={grid} dataEmpty={dataEmpty} systemStats={systemStats} />
 						{pageBottomExtraMargin > 0 && <div style={{ marginBottom: pageBottomExtraMargin }}></div>}
 					</div>
@@ -211,6 +215,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 					)}
 				</TabsContent>
 
+				{/* GPU tab hidden - not needed for this fleet
 				{hasGpu && (
 					<TabsContent value="gpu" forceMount className={activeTab === "gpu" ? "contents" : "hidden"}>
 						<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
@@ -226,7 +231,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 							/>
 						)}
 					</TabsContent>
-				)}
+				)} */}
 
 				{hasContainers && (
 					<TabsContent value="containers" forceMount className={activeTab === "containers" ? "contents" : "hidden"}>
