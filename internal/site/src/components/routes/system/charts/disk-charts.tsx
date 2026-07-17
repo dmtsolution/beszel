@@ -1,6 +1,6 @@
 import { t } from "@lingui/core/macro"
 import AreaChartDefault from "@/components/charts/area-chart"
-import { decimalString, formatBytes, toFixedFloat } from "@/lib/utils"
+import { cn, decimalString, formatBytes, toFixedFloat } from "@/lib/utils"
 import type { SystemStatsRecord } from "@/types"
 import { ChartCard, SelectAvgMax } from "../chart-card"
 import { Unit } from "@/lib/enums"
@@ -255,6 +255,7 @@ export function DiskUtilizationChart({ systemData, extraFsName }: { systemData: 
 
 export function ExtraFsCharts({ systemData }: { systemData: SystemData }) {
 	const { systemStats } = systemData.chartData
+	const { grid } = systemData
 
 	const extraFs = systemStats?.at(-1)?.stats.efs
 
@@ -263,7 +264,7 @@ export function ExtraFsCharts({ systemData }: { systemData: SystemData }) {
 	}
 
 	return (
-		<div className="grid xl:grid-cols-2 gap-4">
+		<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
 			{Object.keys(extraFs).map((extraFsName) => {
 				let diskSize = systemStats.at(-1)?.stats.efs?.[extraFsName].d ?? NaN
 				// round to nearest GB

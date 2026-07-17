@@ -34,7 +34,7 @@ var candidateWebLogSources = []webLogSource{
 
 // combinedLogRe matches the standard Nginx/Apache "combined" access log
 // format: IP - - [time] "METHOD PATH PROTO" STATUS SIZE "referer" "agent"
-var combinedLogRe = regexp.MustCompile(`^(\S+) \S+ \S+ \[([^\]]+)\] "(\S+) (\S+) [^"]*" (\d{3}) `)
+var combinedLogRe = regexp.MustCompile(`^(\S+) \S+ \S+ \[([^\]]+)\] "(\S+) (\S+) [^"]*" (\d{3}) (?:\d+|-) "[^"]*" "([^"]*)"`)
 
 // accessLogTimeLayout matches the bracketed timestamp in combined log format,
 // e.g. "16/Jul/2026:14:32:10 +0000".
@@ -107,15 +107,17 @@ func (alm *authLogManager) webLogState(path string) *logTailState {
 	return state
 }
 
-// parseAccessLogLine turns one combined-format access log line into zero,
-// one, or two events: an HTTP error event (4xx/5xx), and/or a suspicious
-// request event (attack signature, or repeated 404s from the same IP).
+// parseAccessLogLine turns one combined-format access log line into one
+// HTTPAccess event (every request, any status - lets the UI trace exactly
+// when a path's status changed, e.g. 200 -> 404), plus an additional
+// HTTPSuspicious event when the request matches an attack/scan signature or
+// is part of a repeated-404 burst from the same IP.
 func (alm *authLogManager) parseAccessLogLine(line string) []*authlog.Entry {
 	m := combinedLogRe.FindStringSubmatch(line)
 	if m == nil {
 		return nil
 	}
-	ip, rawTime, method, path, statusStr := m[1], m[2], m[3], m[4], m[5]
+	ip, rawTime, method, path, statusStr, userAgent := m[1], m[2], m[3], m[4], m[5], m[6]
 	status, err := strconv.Atoi(statusStr)
 	if err != nil {
 		return nil
@@ -125,23 +127,26 @@ func (alm *authLogManager) parseAccessLogLine(line string) []*authlog.Entry {
 		ts = t.Unix()
 	}
 
-	var out []*authlog.Entry
-
-	if status >= 400 {
-		out = append(out, &authlog.Entry{
-			Time:     ts,
-			Type:     authlog.EventHTTPError,
-			SourceIP: ip,
-			Detail:   method + " " + path + " -> " + statusStr,
-		})
-	}
+	out := []*authlog.Entry{{
+		Time:       ts,
+		Type:       authlog.EventHTTPAccess,
+		SourceIP:   ip,
+		Method:     method,
+		Path:       path,
+		StatusCode: status,
+		UserAgent:  userAgent,
+	}}
 
 	if reason := suspiciousRequestReason(method, path); reason != "" {
 		out = append(out, &authlog.Entry{
-			Time:     ts,
-			Type:     authlog.EventHTTPSuspicious,
-			SourceIP: ip,
-			Detail:   reason + ": " + method + " " + path,
+			Time:       ts,
+			Type:       authlog.EventHTTPSuspicious,
+			SourceIP:   ip,
+			Method:     method,
+			Path:       path,
+			StatusCode: status,
+			UserAgent:  userAgent,
+			Detail:     reason,
 		})
 	} else if status == 404 {
 		if alm.flagRepeated404(ip, ts) {

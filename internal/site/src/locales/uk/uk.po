@@ -179,6 +179,10 @@ msgstr "Всі контейнери"
 msgid "All Systems"
 msgstr "Всі системи"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "All time"
+msgstr ""
+
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
 msgstr "Ви впевнені, що хочете видалити {name}?"
@@ -565,6 +569,12 @@ msgstr "Цикли"
 msgid "Daily"
 msgstr "Щодня"
 
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/dashboard.tsx
+msgid "Dashboard"
+msgstr ""
+
 #: src/components/routes/system/info-bar.tsx
 msgctxt "Default system layout option"
 msgid "Default"
@@ -589,7 +599,7 @@ msgstr "Видалити відбиток"
 msgid "Description"
 msgstr "Опис"
 
-#: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
 msgstr "Деталі"
@@ -918,8 +928,12 @@ msgid "Host / IP"
 msgstr "Хост / IP"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
-msgid "HTTP error"
+msgid "HTTP"
 msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+#~ msgid "HTTP error"
+#~ msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
@@ -970,10 +984,30 @@ msgstr "Інтервал"
 msgid "Invalid email address."
 msgstr "Неправильна адреса електронної пошти."
 
+#: src/components/routes/dashboard.tsx
+msgid "IPs banned (24h)"
+msgstr ""
+
 #: src/components/lang-toggle.tsx
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "Мова"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 24 hours"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 30 days"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 7 days"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last hour"
+msgstr ""
 
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
@@ -1039,7 +1073,9 @@ msgstr "Спроба входу не вдалася"
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
-#: src/components/routes/system.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/system-logs.tsx
+#: src/components/routes/system/info-bar.tsx
 msgid "Logs"
 msgstr "Журнали"
 
@@ -1090,6 +1126,10 @@ msgstr "Використання пам'яті"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Memory usage of docker containers"
 msgstr "Використання пам'яті контейнерами Docker"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Method"
+msgstr ""
 
 #. Device model
 #: src/components/routes/system/smart-table.tsx
@@ -1240,8 +1280,13 @@ msgstr "Запит на скидання пароля отримано"
 msgid "Past"
 msgstr "Минуле"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/dir-usage-table/dir-usage-table-columns.tsx
 msgid "Path"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Path / Detail"
 msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
@@ -1380,6 +1425,11 @@ msgstr "Зв'язки"
 #: src/components/login/login.tsx
 msgid "Request a one-time password"
 msgstr "Запит одноразового пароля"
+
+#: src/components/navbar.tsx
+msgctxt "PocketBase admin request logs, distinct from the app's own security Logs page"
+msgid "Request Logs"
+msgstr ""
 
 #: src/components/login/otp-forms.tsx
 msgid "Request OTP"
@@ -1553,15 +1603,28 @@ msgid "Sort By"
 msgstr "Сортувати за"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "Source IP"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Source port"
 msgstr ""
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "SSH failed"
 msgstr ""
 
+#: src/components/routes/dashboard.tsx
+msgid "SSH failures (24h)"
+msgstr ""
+
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "SSH login"
+msgstr ""
+
+#: src/components/routes/dashboard.tsx
+msgid "SSH logins (24h)"
 msgstr ""
 
 #: src/components/auth-log-table/auth-log-table.tsx
@@ -1569,8 +1632,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/auth-log-table/auth-log-table.tsx
-msgid "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
+msgid "SSH logins, sudo commands, fail2ban bans, and web server activity."
 msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+#~ msgid "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
+#~ msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -1592,6 +1659,10 @@ msgstr "Стан"
 msgid "Status"
 msgstr "Статус"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Status code"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Підстан"
@@ -1602,6 +1673,10 @@ msgstr ""
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "Suspicious request"
+msgstr ""
+
+#: src/components/routes/dashboard.tsx
+msgid "Suspicious requests (24h)"
 msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1641,12 +1716,22 @@ msgid "Systemd Services"
 msgstr "Служби Systemd"
 
 #: src/components/navbar.tsx
+#: src/components/navbar.tsx
+msgctxt "Systems nav link"
+msgid "Systems"
+msgstr ""
+
+#: src/components/navbar.tsx
 msgid "Systems"
 msgstr "Системи"
 
 #: src/components/routes/settings/config-yaml.tsx
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "Системи можуть керуватися у файлі <0>config.yml</0> у вашій директорії даних."
+
+#: src/components/routes/dashboard.tsx
+msgid "Systems up"
+msgstr ""
 
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
@@ -1717,6 +1802,7 @@ msgid "Throughput of root filesystem"
 msgstr "Пропускна здатність кореневої файлової системи"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "Time"
 msgstr ""
 
@@ -1771,6 +1857,7 @@ msgid "Total time spent on read/write (can exceed 100%)"
 msgstr ""
 
 #. placeholder {0}: data.length
+#. placeholder {0}: filteredData.length
 #: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
@@ -1833,6 +1920,7 @@ msgstr "Спрацьовує, коли статус перемикається �
 msgid "Triggers when usage of any disk exceeds a threshold"
 msgstr "Спрацьовує, коли використання будь-якого диска перевищує поріг"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1920,7 +2008,12 @@ msgid "Used"
 msgstr "Використано"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "User"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "User agent"
 msgstr ""
 
 #: src/components/command-palette.tsx
@@ -1940,6 +2033,10 @@ msgstr "Значення"
 #: src/components/systems-table/systems-table.tsx
 msgid "View"
 msgstr "Вигляд"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "View details"
+msgstr ""
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx

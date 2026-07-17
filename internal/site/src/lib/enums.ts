@@ -13,7 +13,7 @@ export enum AuthEventType {
 	Sudo,
 	Ban,
 	Unban,
-	HTTPError,
+	HTTPAccess,
 	HTTPSuspicious,
 	WebServerError,
 }

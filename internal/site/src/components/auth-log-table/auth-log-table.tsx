@@ -12,11 +12,16 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 import { useVirtualizer, type VirtualItem } from "@tanstack/react-virtual"
+import { FilterIcon } from "lucide-react"
 import { listenKeys } from "nanostores"
-import { memo, useEffect, useRef, useState } from "react"
-import { authLogTableCols, getAuthEventLabel } from "@/components/auth-log-table/auth-log-table-columns"
+import { memo, useEffect, useMemo, useRef, useState } from "react"
+import { getAuthEventColor, getAuthEventLabel, makeAuthLogTableCols } from "@/components/auth-log-table/auth-log-table-columns"
+import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { pb } from "@/lib/api"
 import { AuthEventType } from "@/lib/enums"
@@ -27,7 +32,27 @@ import { Separator } from "../ui/separator"
 
 const MAX_EVENTS = 500
 
-export default function AuthLogTable({ systemId }: { systemId?: string }) {
+type Period = "1h" | "24h" | "7d" | "30d" | "all"
+
+const periodSeconds: Record<Exclude<Period, "all">, number> = {
+	"1h": 3600,
+	"24h": 86400,
+	"7d": 7 * 86400,
+	"30d": 30 * 86400,
+}
+
+const allEventTypes = [
+	AuthEventType.SSHSuccess,
+	AuthEventType.SSHFailure,
+	AuthEventType.Sudo,
+	AuthEventType.Ban,
+	AuthEventType.Unban,
+	AuthEventType.HTTPAccess,
+	AuthEventType.HTTPSuspicious,
+	AuthEventType.WebServerError,
+]
+
+export default function AuthLogTable({ systemId, alwaysShow }: { systemId?: string; alwaysShow?: boolean }) {
 	const loadTime = Date.now()
 	const [data, setData] = useState<AuthLogRecord[]>([])
 	const [sorting, setSorting] = useBrowserStorage<SortingState>(
@@ -37,6 +62,17 @@ export default function AuthLogTable({ systemId }: { systemId?: string }) {
 	)
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [globalFilter, setGlobalFilter] = useState("")
+	const [selectedTypes, setSelectedTypes] = useState<Set<AuthEventType>>(new Set())
+	const [period, setPeriod] = useBrowserStorage<Period>("logs-period", "24h", sessionStorage)
+
+	const [sheetOpen, setSheetOpen] = useState(false)
+	const activeEvent = useRef<AuthLogRecord | null>(null)
+	const openSheet = (record: AuthLogRecord) => {
+		activeEvent.current = record
+		setSheetOpen(true)
+	}
+
+	const columns = useMemo(() => makeAuthLogTableCols(openSheet), [])
 
 	useEffect(() => {
 		return setData([])
@@ -47,7 +83,7 @@ export default function AuthLogTable({ systemId }: { systemId?: string }) {
 			pb.collection<AuthLogRecord>("auth_log")
 				.getList(0, MAX_EVENTS, {
 					sort: "-time",
-					fields: "id,time,type,user,source_ip,detail,system",
+					fields: "id,time,type,user,source_ip,detail,method,path,status_code,user_agent,source_port,system",
 					filter: systemId ? pb.filter("system={:system}", { system: systemId }) : undefined,
 				})
 				.then(({ items }) => items.length && setData(items))
@@ -68,9 +104,21 @@ export default function AuthLogTable({ systemId }: { systemId?: string }) {
 		})
 	}, [systemId])
 
+	const filteredData = useMemo(() => {
+		let out = data
+		if (selectedTypes.size > 0) {
+			out = out.filter((d) => selectedTypes.has(d.type as AuthEventType))
+		}
+		if (period !== "all") {
+			const cutoff = Date.now() / 1000 - periodSeconds[period]
+			out = out.filter((d) => d.time >= cutoff)
+		}
+		return out
+	}, [data, selectedTypes, period])
+
 	const table = useReactTable({
-		data,
-		columns: authLogTableCols,
+		data: filteredData,
+		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
@@ -90,7 +138,7 @@ export default function AuthLogTable({ systemId }: { systemId?: string }) {
 		globalFilterFn: (row, _columnId, filterValue) => {
 			const event = row.original
 			const label = getAuthEventLabel(event.type as AuthEventType)
-			const searchString = `${label} ${event.user ?? ""} ${event.source_ip ?? ""} ${event.detail ?? ""}`.toLowerCase()
+			const searchString = `${label} ${event.user ?? ""} ${event.source_ip ?? ""} ${event.path ?? ""} ${event.detail ?? ""}`.toLowerCase()
 			return (filterValue as string)
 				.toLowerCase()
 				.split(" ")
@@ -101,7 +149,7 @@ export default function AuthLogTable({ systemId }: { systemId?: string }) {
 	const rows = table.getRowModel().rows
 	const visibleColumns = table.getVisibleLeafColumns()
 
-	if (!data.length && !globalFilter) {
+	if (!alwaysShow && !data.length && !globalFilter) {
 		return null
 	}
 
@@ -114,22 +162,69 @@ export default function AuthLogTable({ systemId }: { systemId?: string }) {
 							<Trans>Logs</Trans>
 						</CardTitle>
 						<div className="text-sm text-muted-foreground flex items-center flex-wrap">
-							<Trans>Total: {data.length}</Trans>
+							<Trans>Total: {filteredData.length}</Trans>
 							<Separator orientation="vertical" className="h-4 mx-2 bg-primary/40" />
-							<Trans>SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests.</Trans>
+							<Trans>SSH logins, sudo commands, fail2ban bans, and web server activity.</Trans>
 						</div>
 					</div>
-					<Input
-						placeholder={t`Filter...`}
-						value={globalFilter}
-						onChange={(e) => setGlobalFilter(e.target.value)}
-						className="ms-auto px-4 w-full max-w-full md:w-64"
-					/>
+					<div className="flex gap-2 ms-auto flex-wrap">
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button variant="outline" className="gap-2">
+									<FilterIcon className="size-4" />
+									<Trans>Type</Trans>
+									{selectedTypes.size > 0 && <span className="text-xs opacity-70">({selectedTypes.size})</span>}
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent align="end" className="min-w-52">
+								{allEventTypes.map((type) => (
+									<DropdownMenuCheckboxItem
+										key={type}
+										checked={selectedTypes.has(type)}
+										onSelect={(e) => e.preventDefault()}
+										onCheckedChange={(checked) => {
+											setSelectedTypes((prev) => {
+												const next = new Set(prev)
+												if (checked) {
+													next.add(type)
+												} else {
+													next.delete(type)
+												}
+												return next
+											})
+										}}
+									>
+										<span className={cn("size-2 me-1.5 rounded-full", getAuthEventColor(type))} />
+										{getAuthEventLabel(type)}
+									</DropdownMenuCheckboxItem>
+								))}
+							</DropdownMenuContent>
+						</DropdownMenu>
+						<Select value={period} onValueChange={(v) => setPeriod(v as Period)}>
+							<SelectTrigger className="w-36">
+								<SelectValue />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="1h">{t`Last hour`}</SelectItem>
+								<SelectItem value="24h">{t`Last 24 hours`}</SelectItem>
+								<SelectItem value="7d">{t`Last 7 days`}</SelectItem>
+								<SelectItem value="30d">{t`Last 30 days`}</SelectItem>
+								<SelectItem value="all">{t`All time`}</SelectItem>
+							</SelectContent>
+						</Select>
+						<Input
+							placeholder={t`Filter...`}
+							value={globalFilter}
+							onChange={(e) => setGlobalFilter(e.target.value)}
+							className="w-full max-w-full md:w-52"
+						/>
+					</div>
 				</div>
 			</CardHeader>
 			<div className="rounded-md">
 				<AllAuthLogTable table={table} rows={rows} colLength={visibleColumns.length} />
 			</div>
+			<AuthLogSheet sheetOpen={sheetOpen} setSheetOpen={setSheetOpen} activeEvent={activeEvent} />
 		</Card>
 	)
 }
@@ -221,3 +316,58 @@ const AuthLogTableRow = memo(function AuthLogTableRow({ row, virtualRow }: { row
 		</TableRow>
 	)
 })
+
+function AuthLogSheet({
+	sheetOpen,
+	setSheetOpen,
+	activeEvent,
+}: {
+	sheetOpen: boolean
+	setSheetOpen: (open: boolean) => void
+	activeEvent: React.RefObject<AuthLogRecord | null>
+}) {
+	const event = activeEvent.current
+	if (!event) return null
+
+	const notAvailable = <span className="text-muted-foreground">N/A</span>
+
+	const renderRow = (key: string, label: React.ReactNode, value?: React.ReactNode, alwaysShow = false) => {
+		if (!alwaysShow && (value === undefined || value === null || value === "")) {
+			return null
+		}
+		return (
+			<tr key={key} className="border-b last:border-b-0">
+				<td className="px-3 py-2 font-medium bg-muted dark:bg-muted/40 align-top w-35">{label}</td>
+				<td className="px-3 py-2 break-all">{value ?? notAvailable}</td>
+			</tr>
+		)
+	}
+
+	return (
+		<Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+			<SheetContent className="w-full sm:max-w-160 p-6 overflow-y-auto">
+				<SheetHeader className="p-0">
+					<SheetTitle className="flex items-center gap-2">
+						<span className={cn("size-2.5 rounded-full", getAuthEventColor(event.type as AuthEventType, event.status_code))} />
+						{getAuthEventLabel(event.type as AuthEventType)}
+					</SheetTitle>
+				</SheetHeader>
+				<div className="border rounded-md">
+					<table className="w-full text-sm">
+						<tbody>
+							{renderRow("time", t`Time`, new Date(event.time * 1000).toLocaleString(), true)}
+							{renderRow("user", t`User`, event.user)}
+							{renderRow("source_ip", t`Source IP`, event.source_ip)}
+							{renderRow("source_port", t`Source port`, event.source_port)}
+							{renderRow("method", t`Method`, event.method)}
+							{renderRow("path", t`Path`, event.path)}
+							{renderRow("status_code", t`Status code`, event.status_code)}
+							{renderRow("user_agent", t`User agent`, event.user_agent)}
+							{renderRow("detail", t`Detail`, event.detail)}
+						</tbody>
+					</table>
+				</div>
+			</SheetContent>
+		</Sheet>
+	)
+}

@@ -9,9 +9,12 @@ import {
 	MemoryStickIcon,
 	MonitorIcon,
 	Settings2Icon,
+	ShieldIcon,
 } from "lucide-react"
+import { getPagePath } from "@nanostores/router"
 import { useMemo } from "react"
 import ChartTimeSelect from "@/components/charts/chart-time-select"
+import { $router, Link } from "@/components/router"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import {
@@ -38,6 +41,7 @@ export default function InfoBar({
 	displayMode,
 	setDisplayMode,
 	details,
+	hasAuthLog,
 }: {
 	system: SystemRecord
 	chartData: ChartData
@@ -46,6 +50,7 @@ export default function InfoBar({
 	displayMode: "default" | "tabs"
 	setDisplayMode: (mode: "default" | "tabs") => void
 	details: SystemDetailsRecord | null
+	hasAuthLog?: boolean
 }) {
 	const { t } = useLingui()
 
@@ -201,6 +206,14 @@ export default function InfoBar({
 					</div>
 				</div>
 				<div className="xl:ms-auto flex items-center gap-2 max-sm:-mb-1">
+					{hasAuthLog && (
+						<Button variant="outline" className="gap-1.5" asChild>
+							<Link href={getPagePath($router, "system_logs", { id: system.id })}>
+								<ShieldIcon className="size-4" />
+								<Trans>Logs</Trans>
+							</Link>
+						</Button>
+					)}
 					<ChartTimeSelect className="w-full xl:w-40" agentVersion={chartData.agentVersion} />
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
@@ -208,7 +221,7 @@ export default function InfoBar({
 								aria-label={t`Settings`}
 								variant="outline"
 								size="icon"
-								className="hidden xl:flex p-0 text-primary"
+								className="flex p-0 text-primary"
 							>
 								<Settings2Icon className="size-4 opacity-90" />
 							</Button>

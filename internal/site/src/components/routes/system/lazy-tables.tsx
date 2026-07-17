@@ -45,14 +45,3 @@ export function LazyDirUsageTable({ systemId }: { systemId: string }) {
 		</div>
 	)
 }
-
-const AuthLogTable = lazy(() => import("../../auth-log-table/auth-log-table"))
-
-export function LazyAuthLogTable({ systemId }: { systemId: string }) {
-	const { isIntersecting, ref } = useIntersectionObserver({ rootMargin: "90px" })
-	return (
-		<div ref={ref} className={cn(isIntersecting && "contents")}>
-			{isIntersecting && <AuthLogTable systemId={systemId} />}
-		</div>
-	)
-}

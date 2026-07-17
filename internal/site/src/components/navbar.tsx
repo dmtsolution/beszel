@@ -5,6 +5,7 @@ import {
 	ContainerIcon,
 	DatabaseBackupIcon,
 	HardDriveIcon,
+	LayoutDashboardIcon,
 	LogOutIcon,
 	LogsIcon,
 	MenuIcon,
@@ -12,10 +13,12 @@ import {
 	SearchIcon,
 	ServerIcon,
 	SettingsIcon,
+	ShieldIcon,
 	UserIcon,
 	UsersIcon,
 } from "lucide-react"
 import { lazy, Suspense, useState } from "react"
+import { useStore } from "@nanostores/react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
 	DropdownMenu,
@@ -30,6 +33,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { isAdmin, isReadOnlyUser, logOut, pb } from "@/lib/api"
+import { $allSystemsById } from "@/lib/stores"
 import { cn, runOnce } from "@/lib/utils"
 import { AddSystemDialog } from "./add-system"
 import { LangToggle } from "./lang-toggle"
@@ -49,6 +53,10 @@ export default function Navbar() {
 	const AdminLinks = AdminDropdownGroup()
 
 	const systemTranslation = t`System`
+
+	const allSystems = useStore($allSystemsById)
+	const firstSystemId = Object.values(allSystems)[0]?.id
+	const logsHref = firstSystemId ? getPagePath($router, "system_logs", { id: firstSystemId }) : undefined
 
 	return (
 		<div className="flex items-center h-14 md:h-16 bg-card px-4 pe-3 sm:px-6 border border-border/60 bt-0 rounded-md my-4">
@@ -98,6 +106,20 @@ export default function Navbar() {
 						<DropdownMenuLabel className="max-w-40 truncate">{pb.authStore.record?.email}</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
+							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "home"))} className="flex items-center">
+								<LayoutDashboardIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans>Dashboard</Trans>
+							</DropdownMenuItem>
+							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "systems"))} className="flex items-center">
+								<ServerIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans context="Systems nav link">Systems</Trans>
+							</DropdownMenuItem>
+							{logsHref && (
+								<DropdownMenuItem onClick={() => navigate(logsHref)} className="flex items-center">
+									<ShieldIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+									<Trans>Logs</Trans>
+								</DropdownMenuItem>
+							)}
 							<DropdownMenuItem
 								onClick={() => navigate(getPagePath($router, "containers"))}
 								className="flex items-center"
@@ -154,6 +176,46 @@ export default function Navbar() {
 				className="hidden md:flex items-center ms-auto"
 				onMouseEnter={() => import("@/components/routes/settings/general")}
 			>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={getPagePath($router, "home")}
+							className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Dashboard"
+						>
+							<LayoutDashboardIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans>Dashboard</Trans>
+					</TooltipContent>
+				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={getPagePath($router, "systems")}
+							className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Systems"
+						>
+							<ServerIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans context="Systems nav link">Systems</Trans>
+					</TooltipContent>
+				</Tooltip>
+				{logsHref && (
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Link href={logsHref} className={cn(buttonVariants({ variant: "ghost", size: "icon" }))} aria-label="Logs">
+								<ShieldIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+							</Link>
+						</TooltipTrigger>
+						<TooltipContent>
+							<Trans>Logs</Trans>
+						</TooltipContent>
+					</Tooltip>
+				)}
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Link
@@ -259,7 +321,7 @@ function AdminDropdownGroup() {
 				<a href={prependBasePath("/_/#/logs")} target="_blank">
 					<LogsIcon className="me-2.5 h-4 w-4" />
 					<span>
-						<Trans>Logs</Trans>
+						<Trans context="PocketBase admin request logs, distinct from the app's own security Logs page">Request Logs</Trans>
 					</span>
 				</a>
 			</DropdownMenuItem>

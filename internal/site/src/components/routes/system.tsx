@@ -1,6 +1,6 @@
 import { memo, useState } from "react"
 import { Trans } from "@lingui/react/macro"
-import { compareSemVer, parseSemVer } from "@/lib/utils"
+import { cn, compareSemVer, parseSemVer } from "@/lib/utils"
 import { Os } from "@/lib/enums"
 import type { GPUData } from "@/types"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -12,9 +12,9 @@ import { RootDiskCharts, ExtraFsCharts } from "./system/charts/disk-charts"
 import { BandwidthChart, ContainerNetworkChart } from "./system/charts/network-charts"
 import { TemperatureChart, BatteryChart } from "./system/charts/sensor-charts"
 import { GpuPowerChart, GpuDetailCharts } from "./system/charts/gpu-charts"
-import { LazyAuthLogTable, LazyContainersTable, LazyDirUsageTable, LazySmartTable, LazySystemdTable } from "./system/lazy-tables"
+import { LazyContainersTable, LazyDirUsageTable, LazySmartTable, LazySystemdTable } from "./system/lazy-tables"
 import { LoadAverageChart } from "./system/charts/load-average-chart"
-import { ContainerIcon, CpuIcon, HardDriveIcon, ShieldIcon, TerminalSquareIcon } from "lucide-react"
+import { ContainerIcon, CpuIcon, HardDriveIcon, TerminalSquareIcon } from "lucide-react"
 import { GpuIcon } from "../ui/icons"
 import SystemdTable from "../systemd-table/systemd-table"
 import ContainersTable from "../containers-table/containers-table"
@@ -71,7 +71,6 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 	if (hasGpu) tabs.push("gpu")
 	if (hasContainers) tabs.push("containers")
 	if (hasSystemd) tabs.push("services")
-	if (hasAuthLog) tabs.push("logs")
 	tabsRef.current = tabs
 
 	// shared chart props
@@ -81,7 +80,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 		return (
 			<>
 				{/* main charts */}
-				<div className="grid xl:grid-cols-2 gap-4">
+				<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
 					<CpuChart {...coreProps} />
 
 					{hasContainers && (
@@ -150,8 +149,6 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 				{hasContainersTable && <LazyContainersTable systemId={system.id} />}
 
 				{hasSystemd && <LazySystemdTable systemId={system.id} />}
-
-				{hasAuthLog && <LazyAuthLogTable systemId={system.id} />}
 			</>
 		)
 	}
@@ -186,16 +183,10 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 							<Trans>Services</Trans>
 						</TabsTrigger>
 					)}
-					{hasAuthLog && (
-						<TabsTrigger value="logs" className="w-full flex items-center gap-2">
-							<ShieldIcon className="size-3.5" />
-							<Trans>Logs</Trans>
-						</TabsTrigger>
-					)}
 				</TabsList>
 
 				<TabsContent value="core" forceMount className={activeTab === "core" ? "contents" : "hidden"}>
-					<div className="grid xl:grid-cols-2 gap-4">
+					<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
 						<CpuChart {...coreProps} />
 						<MemoryChart {...coreProps} />
 						<LoadAverageChart chartData={chartData} grid={grid} dataEmpty={dataEmpty} />
@@ -210,7 +201,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 				<TabsContent value="disk" forceMount className={activeTab === "disk" ? "contents" : "hidden"}>
 					{mountedTabs.has("disk") && (
 						<>
-							<div className="grid xl:grid-cols-2 gap-4">
+							<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
 								<RootDiskCharts systemData={systemData} />
 							</div>
 							<ExtraFsCharts systemData={systemData} />
@@ -222,7 +213,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 
 				{hasGpu && (
 					<TabsContent value="gpu" forceMount className={activeTab === "gpu" ? "contents" : "hidden"}>
-						<div className="grid xl:grid-cols-2 gap-4">
+						<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
 							{hasGpuPowerData && <GpuPowerChart chartData={chartData} grid={grid} dataEmpty={dataEmpty} />}
 						</div>
 						{hasGpuData && lastGpus && (
@@ -241,7 +232,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 					<TabsContent value="containers" forceMount className={activeTab === "containers" ? "contents" : "hidden"}>
 						{mountedTabs.has("containers") && (
 							<>
-								<div className="grid xl:grid-cols-2 gap-4">
+								<div className={cn("grid gap-4", grid && "xl:grid-cols-2")}>
 									<ContainerCpuChart
 										chartData={chartData}
 										grid={grid}
@@ -275,12 +266,6 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 						{mountedTabs.has("services") && <SystemdTable systemId={system.id} />}
 					</TabsContent>
 				)}
-
-				{hasAuthLog && (
-					<TabsContent value="logs" forceMount className={activeTab === "logs" ? "contents" : "hidden"}>
-						{mountedTabs.has("logs") && <LazyAuthLogTable systemId={system.id} />}
-					</TabsContent>
-				)}
 			</Tabs>
 		)
 	}
@@ -296,6 +281,7 @@ export default memo(function SystemDetail({ id }: { id: string }) {
 				displayMode={displayMode}
 				setDisplayMode={setDisplayMode}
 				details={details}
+				hasAuthLog={hasAuthLog}
 			/>
 
 			{displayMode === "tabs" ? tabbedLayout() : defaultLayout()}

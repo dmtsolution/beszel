@@ -366,7 +366,10 @@ func createAuthLogRecords(app core.App, data []*authlog.Entry, systemId string) 
 	valueStrings := make([]string, 0, len(data))
 	for i, entry := range data {
 		suffix := fmt.Sprintf("%d", i)
-		valueStrings = append(valueStrings, fmt.Sprintf("({:id%[1]s}, {:system}, {:time%[1]s}, {:type%[1]s}, {:user%[1]s}, {:sourceIp%[1]s}, {:detail%[1]s})", suffix))
+		valueStrings = append(valueStrings, fmt.Sprintf(
+			"({:id%[1]s}, {:system}, {:time%[1]s}, {:type%[1]s}, {:user%[1]s}, {:sourceIp%[1]s}, {:detail%[1]s}, {:method%[1]s}, {:path%[1]s}, {:statusCode%[1]s}, {:userAgent%[1]s}, {:sourcePort%[1]s})",
+			suffix,
+		))
 		params["id"+suffix] = makeStableHashId(
 			systemId,
 			fmt.Sprintf("%d", entry.Time),
@@ -374,15 +377,28 @@ func createAuthLogRecords(app core.App, data []*authlog.Entry, systemId string) 
 			entry.User,
 			entry.SourceIP,
 			entry.Detail,
+			entry.Method,
+			entry.Path,
+			fmt.Sprintf("%d", entry.StatusCode),
+			// batch-local index: guarantees uniqueness for bursts of otherwise
+			// identical events within the same second (e.g. repeated health
+			// checks hitting the same path), which is now common since every
+			// access log line is stored, not just errors.
+			suffix,
 		)
 		params["time"+suffix] = entry.Time
 		params["type"+suffix] = entry.Type
 		params["user"+suffix] = entry.User
 		params["sourceIp"+suffix] = entry.SourceIP
 		params["detail"+suffix] = entry.Detail
+		params["method"+suffix] = entry.Method
+		params["path"+suffix] = entry.Path
+		params["statusCode"+suffix] = entry.StatusCode
+		params["userAgent"+suffix] = entry.UserAgent
+		params["sourcePort"+suffix] = entry.SourcePort
 	}
 	queryString := fmt.Sprintf(
-		"INSERT INTO auth_log (id, system, time, type, user, source_ip, detail) VALUES %s ON CONFLICT(id) DO NOTHING",
+		"INSERT INTO auth_log (id, system, time, type, user, source_ip, detail, method, path, status_code, user_agent, source_port) VALUES %s ON CONFLICT(id) DO NOTHING",
 		strings.Join(valueStrings, ","),
 	)
 	if _, err := app.DB().NewQuery(queryString).Bind(params).Execute(); err != nil {

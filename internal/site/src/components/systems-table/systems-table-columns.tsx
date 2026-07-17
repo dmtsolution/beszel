@@ -196,7 +196,9 @@ export function SystemsTableColumns(viewMode: "table" | "grid"): ColumnDef<Syste
 			accessorFn: ({ info }) => info.g || undefined,
 			id: "gpu",
 			name: () => "GPU",
-			cell: TableCellWithMeter,
+			// unlike CPU/Memory/Disk, many systems have no GPU at all rather than
+			// just 0% usage - render nothing rather than a misleading "0.00%" bar
+			cell: (info: CellContext<SystemRecord, unknown>) => (info.getValue() === undefined ? null : TableCellWithMeter(info)),
 			Icon: GpuIcon,
 			header: sortableHeader,
 		},

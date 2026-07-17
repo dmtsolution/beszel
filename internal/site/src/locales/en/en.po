@@ -174,6 +174,10 @@ msgstr "All Containers"
 msgid "All Systems"
 msgstr "All Systems"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "All time"
+msgstr "All time"
+
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
 msgstr "Are you sure you want to delete {name}?"
@@ -560,6 +564,12 @@ msgstr "Cycles"
 msgid "Daily"
 msgstr "Daily"
 
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/dashboard.tsx
+msgid "Dashboard"
+msgstr "Dashboard"
+
 #: src/components/routes/system/info-bar.tsx
 msgctxt "Default system layout option"
 msgid "Default"
@@ -584,7 +594,7 @@ msgstr "Delete fingerprint"
 msgid "Description"
 msgstr "Description"
 
-#: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
 msgstr "Detail"
@@ -913,8 +923,12 @@ msgid "Host / IP"
 msgstr "Host / IP"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
-msgid "HTTP error"
-msgstr "HTTP error"
+msgid "HTTP"
+msgstr "HTTP"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+#~ msgid "HTTP error"
+#~ msgstr "HTTP error"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
@@ -965,10 +979,30 @@ msgstr "Interval"
 msgid "Invalid email address."
 msgstr "Invalid email address."
 
+#: src/components/routes/dashboard.tsx
+msgid "IPs banned (24h)"
+msgstr "IPs banned (24h)"
+
 #: src/components/lang-toggle.tsx
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "Language"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 24 hours"
+msgstr "Last 24 hours"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 30 days"
+msgstr "Last 30 days"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 7 days"
+msgstr "Last 7 days"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last hour"
+msgstr "Last hour"
 
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
@@ -1034,7 +1068,9 @@ msgstr "Login attempt failed"
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
-#: src/components/routes/system.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/system-logs.tsx
+#: src/components/routes/system/info-bar.tsx
 msgid "Logs"
 msgstr "Logs"
 
@@ -1085,6 +1121,10 @@ msgstr "Memory Usage"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Memory usage of docker containers"
 msgstr "Memory usage of docker containers"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Method"
+msgstr "Method"
 
 #. Device model
 #: src/components/routes/system/smart-table.tsx
@@ -1235,9 +1275,14 @@ msgstr "Password reset request received"
 msgid "Past"
 msgstr "Past"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/dir-usage-table/dir-usage-table-columns.tsx
 msgid "Path"
 msgstr "Path"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Path / Detail"
+msgstr "Path / Detail"
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
@@ -1375,6 +1420,11 @@ msgstr "Relationships"
 #: src/components/login/login.tsx
 msgid "Request a one-time password"
 msgstr "Request a one-time password"
+
+#: src/components/navbar.tsx
+msgctxt "PocketBase admin request logs, distinct from the app's own security Logs page"
+msgid "Request Logs"
+msgstr "Request Logs"
 
 #: src/components/login/otp-forms.tsx
 msgid "Request OTP"
@@ -1548,24 +1598,41 @@ msgid "Sort By"
 msgstr "Sort By"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "Source IP"
 msgstr "Source IP"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Source port"
+msgstr "Source port"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "SSH failed"
 msgstr "SSH failed"
 
+#: src/components/routes/dashboard.tsx
+msgid "SSH failures (24h)"
+msgstr "SSH failures (24h)"
+
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "SSH login"
 msgstr "SSH login"
+
+#: src/components/routes/dashboard.tsx
+msgid "SSH logins (24h)"
+msgstr "SSH logins (24h)"
 
 #: src/components/auth-log-table/auth-log-table.tsx
 #~ msgid "SSH logins, sudo commands, and fail2ban bans."
 #~ msgstr "SSH logins, sudo commands, and fail2ban bans."
 
 #: src/components/auth-log-table/auth-log-table.tsx
-msgid "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
-msgstr "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
+msgid "SSH logins, sudo commands, fail2ban bans, and web server activity."
+msgstr "SSH logins, sudo commands, fail2ban bans, and web server activity."
+
+#: src/components/auth-log-table/auth-log-table.tsx
+#~ msgid "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
+#~ msgstr "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -1587,6 +1654,10 @@ msgstr "State"
 msgid "Status"
 msgstr "Status"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Status code"
+msgstr "Status code"
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Sub State"
@@ -1598,6 +1669,10 @@ msgstr "Sudo"
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "Suspicious request"
 msgstr "Suspicious request"
+
+#: src/components/routes/dashboard.tsx
+msgid "Suspicious requests (24h)"
+msgstr "Suspicious requests (24h)"
 
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap space used by the system"
@@ -1636,12 +1711,22 @@ msgid "Systemd Services"
 msgstr "Systemd Services"
 
 #: src/components/navbar.tsx
+#: src/components/navbar.tsx
+msgctxt "Systems nav link"
+msgid "Systems"
+msgstr "Systems"
+
+#: src/components/navbar.tsx
 msgid "Systems"
 msgstr "Systems"
 
 #: src/components/routes/settings/config-yaml.tsx
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "Systems may be managed in a <0>config.yml</0> file inside your data directory."
+
+#: src/components/routes/dashboard.tsx
+msgid "Systems up"
+msgstr "Systems up"
 
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
@@ -1712,6 +1797,7 @@ msgid "Throughput of root filesystem"
 msgstr "Throughput of root filesystem"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "Time"
 msgstr "Time"
 
@@ -1766,6 +1852,7 @@ msgid "Total time spent on read/write (can exceed 100%)"
 msgstr "Total time spent on read/write (can exceed 100%)"
 
 #. placeholder {0}: data.length
+#. placeholder {0}: filteredData.length
 #: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
@@ -1828,6 +1915,7 @@ msgstr "Triggers when status switches between up and down"
 msgid "Triggers when usage of any disk exceeds a threshold"
 msgstr "Triggers when usage of any disk exceeds a threshold"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1915,8 +2003,13 @@ msgid "Used"
 msgstr "Used"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "User"
 msgstr "User"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "User agent"
+msgstr "User agent"
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx
@@ -1935,6 +2028,10 @@ msgstr "Value"
 #: src/components/systems-table/systems-table.tsx
 msgid "View"
 msgstr "View"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "View details"
+msgstr "View details"
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx

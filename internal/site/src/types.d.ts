@@ -416,6 +416,11 @@ export interface AuthLogRecord extends RecordModel {
 	user?: string
 	source_ip?: string
 	detail?: string
+	method?: string
+	path?: string
+	status_code?: number
+	user_agent?: string
+	source_port?: number
 }
 
 export interface DirUsageRecord extends RecordModel {

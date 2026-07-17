@@ -27,10 +27,12 @@ import * as systemsManager from "@/lib/systemsManager.ts"
 import type { BeszelInfo, UpdateInfo } from "./types"
 
 const LoginPage = lazy(() => import("@/components/login/login.tsx"))
+const Dashboard = lazy(() => import("@/components/routes/dashboard.tsx"))
 const Home = lazy(() => import("@/components/routes/home.tsx"))
 const Containers = lazy(() => import("@/components/routes/containers.tsx"))
 const Smart = lazy(() => import("@/components/routes/smart.tsx"))
 const SystemDetail = lazy(() => import("@/components/routes/system.tsx"))
+const SystemLogsPage = lazy(() => import("@/components/routes/system-logs.tsx"))
 const CopyToClipboardDialog = lazy(() => import("@/components/copy-to-clipboard.tsx"))
 
 const App = memo(() => {
@@ -72,9 +74,13 @@ const App = memo(() => {
 	if (!page) {
 		return <h1 className="text-3xl text-center my-14">404</h1>
 	} else if (page.route === "home") {
+		return <Dashboard />
+	} else if (page.route === "systems") {
 		return <Home />
 	} else if (page.route === "system") {
 		return <SystemDetail id={page.params.id} />
+	} else if (page.route === "system_logs") {
+		return <SystemLogsPage id={page.params.id} />
 	} else if (page.route === "containers") {
 		return <Containers />
 	} else if (page.route === "smart") {

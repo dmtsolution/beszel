@@ -8,6 +8,7 @@ import (
 	"log/slog"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 	"sync"
 	"syscall"
@@ -23,8 +24,8 @@ const (
 )
 
 var (
-	sshAcceptedRe    = regexp.MustCompile(`sshd\[\d+\]: Accepted \S+ for (\S+) from (\S+) port \d+`)
-	sshFailedRe      = regexp.MustCompile(`sshd\[\d+\]: Failed \S+ for (?:invalid user )?(\S+) from (\S+) port \d+`)
+	sshAcceptedRe    = regexp.MustCompile(`sshd\[\d+\]: Accepted (\S+) for (\S+) from (\S+) port (\d+)`)
+	sshFailedRe      = regexp.MustCompile(`sshd\[\d+\]: Failed (\S+) for (?:invalid user )?(\S+) from (\S+) port (\d+)`)
 	sudoRe           = regexp.MustCompile(`sudo:\s+(\S+)\s*:.*COMMAND=(.+)$`)
 	authLogTimeRe    = regexp.MustCompile(`^(\S+)\s`)
 	fail2banActionRe = regexp.MustCompile(`^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}),\d+ fail2ban\.actions\s+\[\d+\]: NOTICE\s+\[(\S+)\] (Ban|Unban) (\S+)`)
@@ -178,10 +179,12 @@ func tailNewLines(path string, state *logTailState) []string {
 func parseAuthLogLine(line string) *authlog.Entry {
 	ts := parseSyslogISOTime(line)
 	if m := sshAcceptedRe.FindStringSubmatch(line); m != nil {
-		return &authlog.Entry{Time: ts, Type: authlog.EventSSHSuccess, User: m[1], SourceIP: m[2]}
+		port, _ := strconv.Atoi(m[4])
+		return &authlog.Entry{Time: ts, Type: authlog.EventSSHSuccess, User: m[2], SourceIP: m[3], SourcePort: port, Detail: m[1]}
 	}
 	if m := sshFailedRe.FindStringSubmatch(line); m != nil {
-		return &authlog.Entry{Time: ts, Type: authlog.EventSSHFailure, User: m[1], SourceIP: m[2]}
+		port, _ := strconv.Atoi(m[4])
+		return &authlog.Entry{Time: ts, Type: authlog.EventSSHFailure, User: m[2], SourceIP: m[3], SourcePort: port, Detail: m[1]}
 	}
 	if m := sudoRe.FindStringSubmatch(line); m != nil {
 		return &authlog.Entry{Time: ts, Type: authlog.EventSudo, User: m[1], Detail: strings.TrimSpace(m[2])}

@@ -179,6 +179,10 @@ msgstr "Tous les conteneurs"
 msgid "All Systems"
 msgstr "Tous les systèmes"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "All time"
+msgstr "Tout l'historique"
+
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
 msgstr "Êtes-vous sûr de vouloir supprimer {name} ?"
@@ -565,6 +569,12 @@ msgstr ""
 msgid "Daily"
 msgstr "Quotidien"
 
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/dashboard.tsx
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
 #: src/components/routes/system/info-bar.tsx
 msgctxt "Default system layout option"
 msgid "Default"
@@ -589,7 +599,7 @@ msgstr "Supprimer l'empreinte"
 msgid "Description"
 msgstr ""
 
-#: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
 msgstr "Détail"
@@ -918,8 +928,12 @@ msgid "Host / IP"
 msgstr "Hôte / IP"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
-msgid "HTTP error"
-msgstr "Erreur HTTP"
+msgid "HTTP"
+msgstr "HTTP"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+#~ msgid "HTTP error"
+#~ msgstr "Erreur HTTP"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
@@ -970,10 +984,30 @@ msgstr "Intervalle"
 msgid "Invalid email address."
 msgstr "Adresse email invalide."
 
+#: src/components/routes/dashboard.tsx
+msgid "IPs banned (24h)"
+msgstr "IPs bannies (24h)"
+
 #: src/components/lang-toggle.tsx
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "Langue"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 24 hours"
+msgstr "Dernières 24 heures"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 30 days"
+msgstr "30 derniers jours"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last 7 days"
+msgstr "7 derniers jours"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Last hour"
+msgstr "Dernière heure"
 
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
@@ -1039,7 +1073,9 @@ msgstr "Échec de la tentative de connexion"
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
-#: src/components/routes/system.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/system-logs.tsx
+#: src/components/routes/system/info-bar.tsx
 msgid "Logs"
 msgstr "Journaux"
 
@@ -1090,6 +1126,10 @@ msgstr "Utilisation de la mémoire"
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Memory usage of docker containers"
 msgstr "Utilisation de la mémoire des conteneurs Docker"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Method"
+msgstr "Méthode"
 
 #. Device model
 #: src/components/routes/system/smart-table.tsx
@@ -1240,9 +1280,14 @@ msgstr "Demande de réinitialisation du mot de passe reçue"
 msgid "Past"
 msgstr "Passé"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/dir-usage-table/dir-usage-table-columns.tsx
 msgid "Path"
 msgstr "Chemin"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Path / Detail"
+msgstr "Chemin / Détail"
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
@@ -1380,6 +1425,11 @@ msgstr "Relations"
 #: src/components/login/login.tsx
 msgid "Request a one-time password"
 msgstr "Demander un mot de passe à usage unique"
+
+#: src/components/navbar.tsx
+msgctxt "PocketBase admin request logs, distinct from the app's own security Logs page"
+msgid "Request Logs"
+msgstr "Logs de requêtes"
 
 #: src/components/login/otp-forms.tsx
 msgid "Request OTP"
@@ -1553,24 +1603,41 @@ msgid "Sort By"
 msgstr "Trier par"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "Source IP"
 msgstr "IP source"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Source port"
+msgstr "Port source"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "SSH failed"
 msgstr "Échec SSH"
 
+#: src/components/routes/dashboard.tsx
+msgid "SSH failures (24h)"
+msgstr "Échecs SSH (24h)"
+
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "SSH login"
 msgstr "Connexion SSH"
+
+#: src/components/routes/dashboard.tsx
+msgid "SSH logins (24h)"
+msgstr "Connexions SSH (24h)"
 
 #: src/components/auth-log-table/auth-log-table.tsx
 #~ msgid "SSH logins, sudo commands, and fail2ban bans."
 #~ msgstr "Connexions SSH, commandes sudo et bannissements fail2ban."
 
 #: src/components/auth-log-table/auth-log-table.tsx
-msgid "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
-msgstr "Connexions SSH, commandes sudo, bannissements fail2ban, et erreurs/requêtes suspectes du serveur web."
+msgid "SSH logins, sudo commands, fail2ban bans, and web server activity."
+msgstr "Connexions SSH, commandes sudo, bannissements fail2ban, et activité du serveur web."
+
+#: src/components/auth-log-table/auth-log-table.tsx
+#~ msgid "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
+#~ msgstr "Connexions SSH, commandes sudo, bannissements fail2ban, et erreurs/requêtes suspectes du serveur web."
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -1592,6 +1659,10 @@ msgstr "État"
 msgid "Status"
 msgstr "Statut"
 
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "Status code"
+msgstr "Code de statut"
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Sous-état"
@@ -1603,6 +1674,10 @@ msgstr "Sudo"
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "Suspicious request"
 msgstr "Requête suspecte"
+
+#: src/components/routes/dashboard.tsx
+msgid "Suspicious requests (24h)"
+msgstr "Requêtes suspectes (24h)"
 
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap space used by the system"
@@ -1641,12 +1716,22 @@ msgid "Systemd Services"
 msgstr "Services systemd"
 
 #: src/components/navbar.tsx
+#: src/components/navbar.tsx
+msgctxt "Systems nav link"
+msgid "Systems"
+msgstr "Systèmes"
+
+#: src/components/navbar.tsx
 msgid "Systems"
 msgstr "Systèmes"
 
 #: src/components/routes/settings/config-yaml.tsx
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "Les systèmes peuvent être gérés dans un fichier <0>config.yml</0> à l'intérieur de votre répertoire de données."
+
+#: src/components/routes/dashboard.tsx
+msgid "Systems up"
+msgstr "Systèmes actifs"
 
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
@@ -1717,6 +1802,7 @@ msgid "Throughput of root filesystem"
 msgstr "Débit du système de fichiers racine"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "Time"
 msgstr "Heure"
 
@@ -1771,6 +1857,7 @@ msgid "Total time spent on read/write (can exceed 100%)"
 msgstr ""
 
 #. placeholder {0}: data.length
+#. placeholder {0}: filteredData.length
 #: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Total: {0}"
@@ -1833,6 +1920,7 @@ msgstr "Se déclenche lorsque le statut passe de \"Joignable\" à \"Injoignable\
 msgid "Triggers when usage of any disk exceeds a threshold"
 msgstr "Déclenchement lorsque l'utilisation de tout disque dépasse un seuil"
 
+#: src/components/auth-log-table/auth-log-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1920,8 +2008,13 @@ msgid "Used"
 msgstr "Utilisé"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
+#: src/components/auth-log-table/auth-log-table.tsx
 msgid "User"
 msgstr "Utilisateur"
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "User agent"
+msgstr "User agent"
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx
@@ -1940,6 +2033,10 @@ msgstr "Valeur"
 #: src/components/systems-table/systems-table.tsx
 msgid "View"
 msgstr "Vue"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "View details"
+msgstr "Voir les détails"
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
