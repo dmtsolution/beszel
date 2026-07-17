@@ -13,6 +13,9 @@ export enum AuthEventType {
 	Sudo,
 	Ban,
 	Unban,
+	HTTPError,
+	HTTPSuspicious,
+	WebServerError,
 }
 
 /** Type of chart */

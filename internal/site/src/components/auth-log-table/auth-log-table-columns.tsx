@@ -37,6 +37,12 @@ export function getAuthEventLabel(type: AuthEventType) {
 			return t`Banned`
 		case AuthEventType.Unban:
 			return t`Unbanned`
+		case AuthEventType.HTTPError:
+			return t`HTTP error`
+		case AuthEventType.HTTPSuspicious:
+			return t`Suspicious request`
+		case AuthEventType.WebServerError:
+			return t`Web server error`
 		default:
 			return t`Unknown`
 	}
@@ -54,6 +60,12 @@ export function getAuthEventColor(type: AuthEventType) {
 			return "bg-red-600"
 		case AuthEventType.Unban:
 			return "bg-zinc-500"
+		case AuthEventType.HTTPError:
+			return "bg-orange-500"
+		case AuthEventType.HTTPSuspicious:
+			return "bg-red-600"
+		case AuthEventType.WebServerError:
+			return "bg-yellow-500"
 		default:
 			return "bg-zinc-500"
 	}

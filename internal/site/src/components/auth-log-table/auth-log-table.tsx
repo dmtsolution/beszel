@@ -116,7 +116,7 @@ export default function AuthLogTable({ systemId }: { systemId?: string }) {
 						<div className="text-sm text-muted-foreground flex items-center flex-wrap">
 							<Trans>Total: {data.length}</Trans>
 							<Separator orientation="vertical" className="h-4 mx-2 bg-primary/40" />
-							<Trans>SSH logins, sudo commands, and fail2ban bans.</Trans>
+							<Trans>SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests.</Trans>
 						</div>
 					</div>
 					<Input

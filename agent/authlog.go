@@ -39,12 +39,18 @@ type logTailState struct {
 }
 
 // authLogManager periodically tails auth.log and fail2ban.log for
-// authentication/security-relevant events (SSH logins, sudo commands, bans).
+// authentication/security-relevant events (SSH logins, sudo commands, bans),
+// plus web server (nginx/apache) access/error logs when present.
 type authLogManager struct {
 	sync.Mutex
-	pending     []*authlog.Entry
-	authState   logTailState
-	f2bState    logTailState
+	pending      []*authlog.Entry
+	authState    logTailState
+	f2bState     logTailState
+	webLogStates map[string]*logTailState // keyed by log file path, discovered lazily
+
+	// per-IP 404 tracking for basic scan/brute-force detection
+	notFoundTimes   map[string][]int64
+	notFoundFlagged map[string]int64
 }
 
 // newAuthLogManager returns nil if disabled via SKIP_AUTH_LOG=true.
@@ -52,7 +58,11 @@ func newAuthLogManager() *authLogManager {
 	if skip, _ := utils.GetEnv("SKIP_AUTH_LOG"); skip == "true" {
 		return nil
 	}
-	alm := &authLogManager{}
+	alm := &authLogManager{
+		webLogStates:    make(map[string]*logTailState),
+		notFoundTimes:   make(map[string][]int64),
+		notFoundFlagged: make(map[string]int64),
+	}
 	alm.startWorker()
 	return alm
 }
@@ -88,6 +98,8 @@ func (alm *authLogManager) scan() {
 			newEntries = append(newEntries, entry)
 		}
 	}
+
+	newEntries = append(newEntries, alm.scanWebLogs()...)
 
 	if len(newEntries) == 0 {
 		return

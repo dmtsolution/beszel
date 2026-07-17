@@ -917,6 +917,10 @@ msgstr "Homebrew-Befehl"
 msgid "Host / IP"
 msgstr ""
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "HTTP error"
+msgstr ""
+
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
 msgstr "HTTP-Methode"
@@ -1561,7 +1565,11 @@ msgid "SSH login"
 msgstr ""
 
 #: src/components/auth-log-table/auth-log-table.tsx
-msgid "SSH logins, sudo commands, and fail2ban bans."
+#~ msgid "SSH logins, sudo commands, and fail2ban bans."
+#~ msgstr ""
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
 msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
@@ -1590,6 +1598,10 @@ msgstr "Unterzustand"
 
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "Sudo"
+msgstr ""
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Suspicious request"
 msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1962,6 +1974,10 @@ msgstr "Warnung (%)"
 #: src/components/routes/settings/general.tsx
 msgid "Warning thresholds"
 msgstr "Warnschwellen"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Web server error"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Webhook / Push notifications"

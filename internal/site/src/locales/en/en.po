@@ -912,6 +912,10 @@ msgstr "Homebrew command"
 msgid "Host / IP"
 msgstr "Host / IP"
 
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "HTTP error"
+msgstr "HTTP error"
+
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
 msgstr "HTTP Method"
@@ -1556,8 +1560,12 @@ msgid "SSH login"
 msgstr "SSH login"
 
 #: src/components/auth-log-table/auth-log-table.tsx
-msgid "SSH logins, sudo commands, and fail2ban bans."
-msgstr "SSH logins, sudo commands, and fail2ban bans."
+#~ msgid "SSH logins, sudo commands, and fail2ban bans."
+#~ msgstr "SSH logins, sudo commands, and fail2ban bans."
+
+#: src/components/auth-log-table/auth-log-table.tsx
+msgid "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
+msgstr "SSH logins, sudo commands, fail2ban bans, and web server errors/suspicious requests."
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -1586,6 +1594,10 @@ msgstr "Sub State"
 #: src/components/auth-log-table/auth-log-table-columns.tsx
 msgid "Sudo"
 msgstr "Sudo"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Suspicious request"
+msgstr "Suspicious request"
 
 #: src/components/routes/system/charts/memory-charts.tsx
 msgid "Swap space used by the system"
@@ -1957,6 +1969,10 @@ msgstr "Warning (%)"
 #: src/components/routes/settings/general.tsx
 msgid "Warning thresholds"
 msgstr "Warning thresholds"
+
+#: src/components/auth-log-table/auth-log-table-columns.tsx
+msgid "Web server error"
+msgstr "Web server error"
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Webhook / Push notifications"

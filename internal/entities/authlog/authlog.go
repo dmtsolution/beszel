@@ -1,6 +1,7 @@
 // Package authlog holds authentication/security-relevant events parsed from
-// system logs (SSH logins, sudo command usage, fail2ban bans), used to give
-// visibility into who connected and what privileged actions were taken.
+// system logs (SSH logins, sudo command usage, fail2ban bans, web server
+// errors/suspicious requests), used to give visibility into who connected
+// and what happened on the machine and its web-facing services.
 package authlog
 
 // EventType identifies the kind of authentication/security event.
@@ -12,6 +13,9 @@ const (
 	EventSudo
 	EventBan
 	EventUnban
+	EventHTTPError      // access log entry with a 4xx/5xx status
+	EventHTTPSuspicious // request matching a known attack/scan pattern, or repeated 404s from one IP
+	EventWebServerError // nginx/apache error.log line (server-side issue, not a client request)
 )
 
 // Entry represents a single parsed log event.
